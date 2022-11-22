@@ -101,13 +101,13 @@ app.layout = html.Div(children=[
                         id = "dropdown_cocktail"),
     ]),
     html.Br(),
-    html.P(id = "Cocktail_Output"),
-    html.P(id = "Liquor_Output"),
-    html.P(id = "Ingredients_Output"),
-    html.P(id = "Instructions_Output"),
-    html.P(id = "Glassware_Output"),
-    html.P(id = "Garnish_Output"),
-    html.P(id = "Source_Output")
+    html.Div(id = "Cocktail_Output"),
+    html.Div(id = "Liquor_Output"),
+    html.Div(id = "Ingredients_Output"),
+    html.Div(id = "Instructions_Output"),
+    html.Div(id = "Glassware_Output"),
+    html.Div(id = "Garnish_Output"),
+    html.Div(id = "Source_Output")
 
 ])
 
@@ -121,9 +121,10 @@ def cocktail_output(user_input):
     if(user_input == None):
         output = None
     else:
+        output = [html.H2(children='Cocktail:', style = {'text-decoration': 'underline', 'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
         mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
         cocktail = mini_df['Cocktail_Name'].iloc[0]
-        output += f"Cocktail: {cocktail}"
+        output += [html.P(children = f"{cocktail}", style = {'margin-left':50, 'margin-right':50, 'font-size': '30px'})]
     return output
 
 
@@ -136,9 +137,10 @@ def cocktail_output(user_input):
     if(user_input == None):
         output = None
     else:
+        output = [html.H2(children='Liquor:', style = {'text-decoration': 'underline', 'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
         mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
         liquor = mini_df['Liquor_Name'].iloc[0]
-        output += f"Liquor: {liquor}"
+        output += [html.P(children = f"{liquor}", style = {'margin-left':50, 'margin-right':50, 'font-size': '30px'})]
     return output
 
 
@@ -151,11 +153,11 @@ def cocktail_output(user_input):
     if(user_input == None):
         output = None
     else:
-        output = ["Ingredients:", html.Br()]
+        output = [html.H2(children='Ingredients:', style = {'text-decoration': 'underline', 'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
         mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
         ingredients = mini_df['Ingredients'].iloc[0]
         for i in range(len(ingredients)):
-            output +=  [f"{ingredients[i]}"]
+            output += [html.P(children = f"{ingredients[i]}", style = {'margin-left':50, 'margin-right':50, 'font-size': '30px'})]
             output +=  [html.Br()]
     return output
 
@@ -169,11 +171,11 @@ def cocktail_output(user_input):
     if(user_input == None):
         output = None
     else:
-        output = ["Instructions:", html.Br()]
+        output = [html.H2(children='Instructions:', style = {'text-decoration': 'underline', 'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
         mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
         instructions = mini_df['Instructions'].iloc[0]
         for i in range(len(instructions)):
-            output +=  [f"{instructions[i]}"]
+            output += [html.P(children = f"{instructions[i]}", style = {'margin-left':50, 'margin-right':50, 'font-size': '30px'})]
             output +=  [html.Br()]
     return output
 
@@ -187,9 +189,10 @@ def cocktail_output(user_input):
     if(user_input == None):
         output = None
     else:
+        output = [html.H2(children='Glassware:', style = {'text-decoration': 'underline', 'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
         mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
         glassware = mini_df['Glassware_Name'].iloc[0]
-        output += f"Glassware: {glassware}"
+        output += [html.P(children = f"{glassware}", style = {'margin-left':50, 'margin-right':50, 'font-size': '30px'})]
     return output
 
 
@@ -202,9 +205,10 @@ def cocktail_output(user_input):
     if(user_input == None):
         output = None
     else:
+        output = [html.H2(children='Garnish:', style = {'text-decoration': 'underline', 'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
         mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
         garnish = mini_df['Garnish_Name'].iloc[0]
-        output += f"Garnsih: {garnish}"
+        output += [html.P(children = f"{garnish}", style = {'margin-left':50, 'margin-right':50, 'font-size': '30px'})]
     return output
 
 
@@ -217,9 +221,10 @@ def cocktail_output(user_input):
     if(user_input == None):
         output = None
     else:
+        output = [html.H2(children='Source:', style = {'text-decoration': 'underline', 'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
         mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
         source = mini_df['Source'].iloc[0]
-        output += f"Source: {source}"
+        output += [html.P(children = f"{source}", style = {'margin-left':50, 'margin-right':50, 'font-size': '30px'})]
     return output
 
 
