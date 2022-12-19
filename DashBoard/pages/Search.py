@@ -1,6 +1,6 @@
 import dash
 import dash_bootstrap_components as dbc
-from dash import Input, Output, State, dcc, html
+from dash import Input, Output, State, dcc, html, callback
 import dash_html_components as html
 import plotly.express as px
 import pandas as pd
@@ -9,21 +9,21 @@ import pymssql
 
 
 # import SQL database connection strings - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-from config import database
-from config import username
-from config import password
-from config import server
+from pages.config import database
+from pages.config import username
+from pages.config import password
+from pages.config import server
 
-from config import Garnishes
-from config import Glassware
-from config import Ingredients
-from config import Instructions
-from config import Instructions_by_Drink
-from config import Liquors
-from config import Measured_Ingredients
-from config import Measurements
-from config import Recipes
-from config import Sources
+from pages.config import Garnishes
+from pages.config import Glassware
+from pages.config import Ingredients
+from pages.config import Instructions
+from pages.config import Instructions_by_Drink
+from pages.config import Liquors
+from pages.config import Measured_Ingredients
+from pages.config import Measurements
+from pages.config import Recipes
+from pages.config import Sources
 
 
 try:
@@ -78,19 +78,18 @@ Cocktails["Source"] = Cocktails["Source"].astype(str)
 Cocktails["Ingredients"] = Cocktails.apply(lambda x : x["Ingredients"].split("&,& "), axis = 1)
 Cocktails["Instructions"] = Cocktails.apply(lambda x : x["Instructions"].split("&,& "), axis = 1)
 
-# DashBoard - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# app - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 # link fontawesome 
 FA = "https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP, FA])
-server = app.server
-
+dash.register_page(__name__, path='/Search')
 
 cocktail_names = list(set(Cocktails["Cocktail_Name"].tolist()))
 cocktail_names.sort()
 
 
-app.layout = html.Div(children=[
-    html.H1(children='Cocktail Recommendations', style={'textAlign': 'center', 'font-size': '50px', 'text-decoration': 'underline', 'margin-bottom':25, 'margin-top':25}),
+# app for cocktail search with all information formatted
+layout = html.Div(children=[
+    html.H1(children='Search for a Cocktail', style={'textAlign': 'center', 'font-size': '50px', 'text-decoration': 'underline', 'margin-bottom':25, 'margin-top':25}),
     # Cocktail Relay System
     html.Div([
         dcc.Dropdown(options=cocktail_names,
@@ -111,8 +110,8 @@ app.layout = html.Div(children=[
 
 ])
 
-
-@app.callback(
+# Basic Cocktail Search Callbacks - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+@callback(
     Output("Cocktail_Output", component_property = "children"),
     Input("dropdown_cocktail", component_property = "value")
 )
@@ -128,7 +127,7 @@ def cocktail_output(user_input):
     return output
 
 
-@app.callback(
+@callback(
     Output("Liquor_Output", component_property = "children"),
     Input("dropdown_cocktail", component_property = "value")
 )
@@ -144,7 +143,7 @@ def cocktail_output(user_input):
     return output
 
 
-@app.callback(
+@callback(
     Output("Ingredients_Output", component_property = "children"),
     Input("dropdown_cocktail", component_property = "value")
 )
@@ -162,7 +161,7 @@ def cocktail_output(user_input):
     return output
 
 
-@app.callback(
+@callback(
     Output("Instructions_Output", component_property = "children"),
     Input("dropdown_cocktail", component_property = "value")
 )
@@ -180,7 +179,7 @@ def cocktail_output(user_input):
     return output
 
 
-@app.callback(
+@callback(
     Output("Glassware_Output", component_property = "children"),
     Input("dropdown_cocktail", component_property = "value")
 )
@@ -196,7 +195,7 @@ def cocktail_output(user_input):
     return output
 
 
-@app.callback(
+@callback(
     Output("Garnish_Output", component_property = "children"),
     Input("dropdown_cocktail", component_property = "value")
 )
@@ -212,7 +211,7 @@ def cocktail_output(user_input):
     return output
 
 
-@app.callback(
+@callback(
     Output("Source_Output", component_property = "children"),
     Input("dropdown_cocktail", component_property = "value")
 )
@@ -226,7 +225,3 @@ def cocktail_output(user_input):
         source = mini_df['Source'].iloc[0]
         output += [html.P(children = f"{source}", style = {'margin-left':50, 'margin-right':50, 'font-size': '30px'})]
     return output
-
-
-if __name__ == '__main__':
-    app.run_server(debug=True)
