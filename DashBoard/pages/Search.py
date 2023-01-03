@@ -97,6 +97,7 @@ layout = html.Div(children=[
                         value= None,  # initial value displayed when page first loads
                         clearable=False,
                         searchable = True,
+                        style={"backgroundColor": "white", "color": "black"},
                         id = "dropdown_cocktail"),
     ]),
     html.Br(),

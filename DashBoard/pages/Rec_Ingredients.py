@@ -78,6 +78,22 @@ try:
 except Exception as e:
     print(e)
 
+
+try:
+    conn = pymssql.connect(server,username, password,database)
+
+    cursor = conn.cursor()
+    Ingredient_query = f"""
+    SELECT DISTINCT
+        ING.Ingredient_Name
+        FROM {Ingredients} AS ING
+    ORDER BY ING.Ingredient_Name ASC
+    """
+    Ingredient_query = pd.read_sql(Ingredient_query, conn)
+except Exception as e:
+    print(e)
+
+
 Cocktails["Cocktail_Name"] = Cocktails["Cocktail_Name"].astype(str)
 Cocktails["Liquor_Name"] = Cocktails["Liquor_Name"].astype(str)
 Cocktails["Glassware_Name"] = Cocktails["Glassware_Name"].astype(str)
@@ -92,7 +108,9 @@ Cocktails["Instructions"] = Cocktails.apply(lambda x : x["Instructions"].split("
 def list_breakdown(list_):
     result = []
     for i in list_:
-        result += i.split(" ")
+        i = i.strip()
+        if(i == ""):continue
+        else: result += i.split(" ")
     return result
 
 def Similarity_Added_labels(df_drinks, drink_ingredients_list):
@@ -106,6 +124,7 @@ def Similarity_Added_labels(df_drinks, drink_ingredients_list):
                 measure += 1 
         return measure
 
+    drink_ingredients_list = list(set(list(map(str.strip, drink_ingredients_list))))
     df_drinks["Similarity"] = df_drinks.apply(lambda x : Similarity_Measure(x["Ingredients_List"], drink_ingredients_list), axis = 1)
     df_drinks = df_drinks.sort_values(by = "Similarity", ascending = False)
     max_measure = df_drinks["Similarity"].max()
@@ -115,13 +134,15 @@ def Similarity_Added_labels(df_drinks, drink_ingredients_list):
         return None
     else:
         similarity_count_df = pd.DataFrame(df_drinks["Similarity"].value_counts()).sort_values(by="Similarity", ascending= False)
-        num_sim_cocktails = similarity_count_df.iloc[max_measure]["Similarity"]
+        num_sim_cocktails = similarity_count_df.tail(1)["Similarity"].reset_index().drop(["index"], axis = 1).loc[similarity_count_df.index[0]]["Similarity"]
         if(num_sim_cocktails == 3):
             return df_drinks_sim
         else:
             if(num_sim_cocktails < 3):
-                other_drinks = df_drinks[df_drinks["Similarity"] == (max_measure - 1)]
-                #return df_drinks_sim
+                for i in range(1,max_measure+1):
+                    other_drinks = df_drinks[df_drinks["Similarity"] == (max_measure - i)]
+                    if(len(other_drinks) == 0): continue
+                    else: break
                 return pd.concat([df_drinks_sim, other_drinks.sample(3 - num_sim_cocktails)], axis=0)
             else:
                 return df_drinks_sim.sample(3)
@@ -134,15 +155,18 @@ dash.register_page(__name__, path='/Ingredient_based_Recommendation')
 cocktail_names = list(set(Cocktails["Cocktail_Name"].tolist()))
 cocktail_names.sort()
 
+Ingredient_query = list(set(Ingredient_query["Ingredient_Name"].tolist()))
+Ingredient_query.sort()
+
 # app for cocktail search with all information formatted
 layout = html.Div(children=[
     html.H1(children='Ingredient Based Recommendations', style={'textAlign': 'center', 'font-size': '50px', 'text-decoration': 'underline', 'margin-bottom':25, 'margin-top':25}),
     # Cocktail Relay System
     html.Div([
         dcc.Textarea(
-            id='textarea-state-example',
-            value='Textarea content initialized\nwith multiple lines of text',
-            style={'width': '100%', 'height': 200},
+        id='textarea-state-example',
+        placeholder='If specific ingredients are not found in dropdown menu above \nplease type them in here with commas separating the ingredients.\nFor example: Cherry, Lime, Vodka',
+        style={'width': '100%', 'height': 80},
         ),
         html.Button('Submit', id='textarea-state-example-button', n_clicks=0),
         html.Div(id='textarea-state-example-output', style={'whiteSpace': 'pre-line'})
@@ -151,9 +175,13 @@ layout = html.Div(children=[
 ])
 
 def list_formatter(list_):
+    list_.sort()
     result = "\n"
     for i in list_:
-        result += str(i) + "\n"
+        i = i.strip()
+        if(i == ""):continue
+        else:
+            result += str(i).title() + "\n"
     return result
 
 @callback(
@@ -161,11 +189,22 @@ def list_formatter(list_):
     Input('textarea-state-example-button', 'n_clicks'),
     State('textarea-state-example', 'value')
 )
-def update_output(n_clicks, value):
+def update_output(n_clicks, value_1):
     if n_clicks > 0:
-        ingrdient_list = value.split(",")
-        recommendations = Similarity_Added_labels(Cocktails, ingrdient_list)
-        if isinstance(recommendations, type(None)):
-            return f"You have entered: {list_formatter(ingrdient_list)}"
-        else: 
-            return f"You have entered: {list_formatter(ingrdient_list)}"
+        if(value_1 == None):
+            return f"\nYou have entered: \nNo ingredients have been entered yet."
+        else:
+            value_1 = value_1.strip()
+            if(value_1 == [] or value_1 == None or value_1 ==""):
+                return f"\nYou have entered: \nNo ingredients have been entered yet."
+            else:
+                ingrdient_list = value_1.split(",")
+                ingrdient_list = list(set(list(map(str.strip, ingrdient_list))))
+                recommendations = Similarity_Added_labels(Cocktails, ingrdient_list)
+                if isinstance(recommendations, type(None)):
+                    return f"\nYou have entered: (with duplicates removed){list_formatter(ingrdient_list)}"
+                else: 
+                    return f"\nYou have entered: (with duplicates removed){list_formatter(ingrdient_list)}"  
+
+# https://dash-bootstrap-components.opensource.faculty.ai/docs/components/layout/
+# columns output for drinks

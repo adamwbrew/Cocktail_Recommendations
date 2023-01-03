@@ -2,7 +2,7 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import Input, Output, dcc, html
 
-app = dash.Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.DARKLY])
 server = app.server
 
 # the style arguments for the sidebar. We use position:fixed and a fixed width
@@ -24,22 +24,21 @@ CONTENT_STYLE = {
     "padding": "2rem 1rem",
 }
 
-app.layout = html.Div([
-	html.H1('Cocktails Recommendation Service'),
 
-    html.Div(
-        [
-            html.Div(
-                dcc.Link(
-                    f"{page['name']}", href=page["relative_path"]
-                )
-            )
-            for page in dash.page_registry.values()
-        ]
+app.layout = dbc.Container([
+    dbc.NavbarSimple([
+        dbc.NavItem(dbc.NavLink(page['name'], href=page['path']))
+        for page in dash.page_registry.values()
+    ], 
+    dark = True,
+    color = "dark",
     ),
-
-	dash.page_container
+    dash.page_container
 ])
+
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+
+    # https://dash.plotly.com/urls
