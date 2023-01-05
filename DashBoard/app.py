@@ -32,6 +32,8 @@ app.layout = dbc.Container([
     ], 
     dark = True,
     color = "dark",
+    expand = "lg",
+    sticky = "top"
     ),
     dash.page_container
 ])

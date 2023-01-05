@@ -2,9 +2,7 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import Input, Output, State, dcc, html, callback
 import dash_html_components as html
-import plotly.express as px
 import pandas as pd
-import plotly.graph_objects as go
 import pymssql
 
 
@@ -124,7 +122,6 @@ def Similarity_Added_labels(df_drinks, drink_ingredients_list):
                 measure += 1 
         return measure
 
-    drink_ingredients_list = list(set(list(map(str.strip, drink_ingredients_list))))
     df_drinks["Similarity"] = df_drinks.apply(lambda x : Similarity_Measure(x["Ingredients_List"], drink_ingredients_list), axis = 1)
     df_drinks = df_drinks.sort_values(by = "Similarity", ascending = False)
     max_measure = df_drinks["Similarity"].max()
@@ -139,11 +136,27 @@ def Similarity_Added_labels(df_drinks, drink_ingredients_list):
             return df_drinks_sim
         else:
             if(num_sim_cocktails < 3):
+                # Finds 3 drinks based on similarity measure
+                other_drinks = df_drinks.sample(0)
                 for i in range(1,max_measure+1):
-                    other_drinks = df_drinks[df_drinks["Similarity"] == (max_measure - i)]
-                    if(len(other_drinks) == 0): continue
+                    other_drinks = pd.concat([other_drinks, df_drinks[df_drinks["Similarity"] == (max_measure - i)]], axis=0)
+                    if(len(other_drinks) < 3): continue
                     else: break
-                return pd.concat([df_drinks_sim, other_drinks.sample(3 - num_sim_cocktails)], axis=0)
+                # Returns 3 drinks in order of similarity measure
+                result_df_ranked = df_drinks_sim
+                for i in range(1,max_measure+1):
+                    if(len(result_df_ranked) == 3):break
+                    elif(len(result_df_ranked) < 3):
+                        if(len(other_drinks[other_drinks["Similarity"] == (max_measure - i)]) >= 1):
+                            if(len(other_drinks[other_drinks["Similarity"] == (max_measure - i)]) == 1):
+                                result_df_ranked = pd.concat([result_df_ranked, other_drinks[other_drinks["Similarity"] == (max_measure - i)].sample(1)], axis=0)
+                            else:
+                                result_df_ranked = pd.concat([result_df_ranked, other_drinks[other_drinks["Similarity"] == (max_measure - i)].sample(3-len(result_df_ranked))], axis=0)
+                        else:
+                            # this is when the other_drinks has length 0, meaning we can bypass it sense it has no information
+                            continue
+                    
+                return result_df_ranked
             else:
                 return df_drinks_sim.sample(3)
 
@@ -216,7 +229,6 @@ def update_output(n_clicks, value_1):
                     output_Ingredients_1 = [html.H2("Ingredients")]
                     for i in range(len(Ingredients_Names[0])):
                         output_Ingredients_1 += [html.P(children = f"{Ingredients_Names[0][i]}")]
-                    
                     output_Instructions_1 = [html.H2("Instructions")]
                     for i in range(len(Instructions_Names[0])):
                         output_Instructions_1 += [html.P(children = f"{Instructions_Names[0][i]}")]
@@ -224,7 +236,6 @@ def update_output(n_clicks, value_1):
                     output_Ingredients_2 = [html.H2("Ingredients")]
                     for i in range(len(Ingredients_Names[1])):
                         output_Ingredients_2 += [html.P(children = f"{Ingredients_Names[1][i]}")]
-                    
                     output_Instructions_2 = [html.H2("Instructions")]
                     for i in range(len(Instructions_Names[1])):
                         output_Instructions_2 += [html.P(children = f"{Instructions_Names[1][i]}")]
@@ -232,10 +243,55 @@ def update_output(n_clicks, value_1):
                     output_Ingredients_3 = [html.H2("Ingredients")]
                     for i in range(len(Ingredients_Names[2])):
                         output_Ingredients_3 += [html.P(children = f"{Ingredients_Names[2][i]}")]
-                    
                     output_Instructions_3 = [html.H2("Instructions")]
                     for i in range(len(Instructions_Names[2])):
                         output_Instructions_3 += [html.P(children = f"{Instructions_Names[2][i]}")]
+
+
+                    output_Source_1 = [html.H2("Source")]
+                    if("," in Source_Names[0]):
+                        Source_Names[0] = Source_Names[0].split(",")
+                        for i in Source_Names[0]:
+                            if(i == "Unknown"):continue
+                            elif(i[-4:] == ".com"):
+                                output_Source_1 += [html.P(children = f"Website{i[(i.find(':')):]}")]
+                            else:
+                                output_Source_1 += [html.P(children = f"{i}")]
+                    elif(Source_Names[0][-4:] == ".com"):
+                        output_Source_1 += [html.P(children = f"Website{Source_Names[0][(Source_Names[0].find(':')):]}")]
+                    else: 
+                        output_Source_1 += [html.P(children = f"{Source_Names[0]}")]
+
+
+                    output_Source_2 = [html.H2("Source")]
+                    if("," in Source_Names[1]):
+                        Source_Names[1] = Source_Names[1].split(",")
+                        for i in Source_Names[1]:
+                            if(i == "Unknown"):continue
+                            elif(i[-4:] == ".com"):
+                                output_Source_2 += [html.P(children = f"Website{i[(i.find(':')):]}")]
+                            else:
+                                output_Source_2 += [html.P(children = f"{i}")]
+                    elif(Source_Names[1][-4:] == ".com"):
+                        output_Source_2 += [html.P(children = f"Website{Source_Names[1][(Source_Names[1].find(':')):]}")]
+                    else: 
+                        output_Source_2 += [html.P(children = f"{Source_Names[1]}")]
+
+
+                    output_Source_3 = [html.H2("Source")]
+                    if("," in Source_Names[2]):
+                        Source_Names[2] = Source_Names[2].split(",")
+                        for i in Source_Names[2]:
+                            if(i == "Unknown"):continue
+                            elif(i[-4:] == ".com"):
+                                output_Source_3 += [html.P(children = f"Website{i[(i.find(':')):]}")]
+                            else:
+                                output_Source_3 += [html.P(children = f"{i}")]
+                    elif(Source_Names[2][-4:] == ".com"):
+                        output_Source_3 += [html.P(children = f"Website{Source_Names[2][(Source_Names[2].find(':')):]}")]
+                    else: 
+                        output_Source_3 += [html.P(children = f"{Source_Names[2]}")]
+
 
                     row_break = html.Div(html.Hr(style={'borderWidth': "5.5vh", "width": "100%", "color": "#FFFFFF", 'textAlign': 'center'}))
                     input = html.P(children=f"\nYou have entered: (with duplicates removed){list_formatter(ingrdient_list)}" , style={'font-size': '15px', 'margin-bottom':25, 'margin-top':25})
@@ -247,7 +303,7 @@ def update_output(n_clicks, value_1):
                                     dbc.Col(html.Div([html.H2("Liquor"), html.P(f"{Liquor_Names[0]}")])),
                                     dbc.Col(html.Div([html.H2("Garnish"), html.P(f"{Garnish_Names[0]}")])),
                                     dbc.Col(html.Div([html.H2("Glassware"), html.P(f"{Glassware_Names[0]}")])),
-                                    dbc.Col(html.Div([html.H2("Source"), html.P(f"{Source_Names[0]}")])),
+                                    dbc.Col(html.Div(output_Source_1)),
                                 ]
                             ),
                             html.Br(),
@@ -267,7 +323,7 @@ def update_output(n_clicks, value_1):
                                     dbc.Col(html.Div([html.H2("Liquor"), html.P(f"{Liquor_Names[1]}")])),
                                     dbc.Col(html.Div([html.H2("Garnish"), html.P(f"{Garnish_Names[1]}")])),
                                     dbc.Col(html.Div([html.H2("Glassware"), html.P(f"{Glassware_Names[1]}")])),
-                                    dbc.Col(html.Div([html.H2("Source"), html.P(f"{Source_Names[1]}")])),
+                                    dbc.Col(html.Div(output_Source_2)),
                                 ]
                             ),
                             html.Br(),
@@ -287,7 +343,7 @@ def update_output(n_clicks, value_1):
                                     dbc.Col(html.Div([html.H2("Liquor"), html.P(f"{Liquor_Names[2]}")])),
                                     dbc.Col(html.Div([html.H2("Garnish"), html.P(f"{Garnish_Names[2]}")])),
                                     dbc.Col(html.Div([html.H2("Glassware"), html.P(f"{Glassware_Names[2]}")])),
-                                    dbc.Col(html.Div([html.H2("Source"), html.P(f"{Source_Names[2]}")])),
+                                    dbc.Col(html.Div(output_Source_3)),
                                 ]
                             ),
                             html.Br(),
@@ -303,6 +359,3 @@ def update_output(n_clicks, value_1):
                                                           header_2, row_2, row_break,
                                                           header_3, row_3, row_break])
                     return result  
-
-# https://dash-bootstrap-components.opensource.faculty.ai/docs/components/layout/
-# columns output for drinks
