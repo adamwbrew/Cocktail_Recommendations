@@ -27,7 +27,7 @@ CONTENT_STYLE = {
 
 app.layout = dbc.Container([
     dbc.NavbarSimple([
-        dbc.NavItem(dbc.NavLink(page['name'], href=page['path']))
+        dbc.NavItem(dbc.NavLink(page['name'].title(), href=page['path']))
         for page in dash.page_registry.values()
     ], 
     dark = True,

@@ -133,8 +133,8 @@ def Similarity_Added_labels(df_drinks, drink_ingredients_list):
     if(max_measure == 0):
         return None
     else:
-        similarity_count_df = pd.DataFrame(df_drinks["Similarity"].value_counts()).sort_values(by="Similarity", ascending= False)
-        num_sim_cocktails = similarity_count_df.tail(1)["Similarity"].reset_index().drop(["index"], axis = 1).loc[similarity_count_df.index[0]]["Similarity"]
+        similarity_count_df = pd.DataFrame(df_drinks["Similarity"].value_counts()).reset_index().sort_values(by="index", ascending= False)
+        num_sim_cocktails = similarity_count_df.head(1)["Similarity"].tolist()[0]
         if(num_sim_cocktails == 3):
             return df_drinks_sim
         else:
@@ -165,10 +165,10 @@ layout = html.Div(children=[
     html.Div([
         dcc.Textarea(
         id='textarea-state-example',
-        placeholder='If specific ingredients are not found in dropdown menu above \nplease type them in here with commas separating the ingredients.\nFor example: Cherry, Lime, Vodka',
+        placeholder='Type ingredients here with commas separating the ingredients.\nFor example: Cherry, Lime, Vodka',
         style={'width': '100%', 'height': 80},
         ),
-        html.Button('Submit', id='textarea-state-example-button', n_clicks=0),
+        html.Div([dbc.Button("Click me", id="textarea-state-example-button", color="info", className="me-1", n_clicks=0)]),
         html.Div(id='textarea-state-example-output', style={'whiteSpace': 'pre-line'})
 
     ])
@@ -202,9 +202,107 @@ def update_output(n_clicks, value_1):
                 ingrdient_list = list(set(list(map(str.strip, ingrdient_list))))
                 recommendations = Similarity_Added_labels(Cocktails, ingrdient_list)
                 if isinstance(recommendations, type(None)):
-                    return f"\nYou have entered: (with duplicates removed){list_formatter(ingrdient_list)}"
+                    return f"\nYou have entered: (with duplicates removed){list_formatter(ingrdient_list)}\n \nUnfortunately no coktails were found with the ingredients you inputted."
                 else: 
-                    return f"\nYou have entered: (with duplicates removed){list_formatter(ingrdient_list)}"  
+                    # Output cocktail Setup - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                    Cocktail_Names = recommendations["Cocktail_Name"].tolist()
+                    Liquor_Names = recommendations["Liquor_Name"].tolist()
+                    Garnish_Names = recommendations["Garnish_Name"].tolist()
+                    Source_Names = recommendations["Source"].tolist()
+                    Glassware_Names = recommendations["Glassware_Name"].tolist()
+                    Ingredients_Names = recommendations["Ingredients"].tolist()
+                    Instructions_Names = recommendations["Instructions"].tolist()
+
+                    output_Ingredients_1 = [html.H2("Ingredients")]
+                    for i in range(len(Ingredients_Names[0])):
+                        output_Ingredients_1 += [html.P(children = f"{Ingredients_Names[0][i]}")]
+                    
+                    output_Instructions_1 = [html.H2("Instructions")]
+                    for i in range(len(Instructions_Names[0])):
+                        output_Instructions_1 += [html.P(children = f"{Instructions_Names[0][i]}")]
+
+                    output_Ingredients_2 = [html.H2("Ingredients")]
+                    for i in range(len(Ingredients_Names[1])):
+                        output_Ingredients_2 += [html.P(children = f"{Ingredients_Names[1][i]}")]
+                    
+                    output_Instructions_2 = [html.H2("Instructions")]
+                    for i in range(len(Instructions_Names[1])):
+                        output_Instructions_2 += [html.P(children = f"{Instructions_Names[1][i]}")]
+
+                    output_Ingredients_3 = [html.H2("Ingredients")]
+                    for i in range(len(Ingredients_Names[2])):
+                        output_Ingredients_3 += [html.P(children = f"{Ingredients_Names[2][i]}")]
+                    
+                    output_Instructions_3 = [html.H2("Instructions")]
+                    for i in range(len(Instructions_Names[2])):
+                        output_Instructions_3 += [html.P(children = f"{Instructions_Names[2][i]}")]
+
+                    row_break = html.Div(html.Hr(style={'borderWidth': "5.5vh", "width": "100%", "color": "#FFFFFF", 'textAlign': 'center'}))
+                    input = html.P(children=f"\nYou have entered: (with duplicates removed){list_formatter(ingrdient_list)}" , style={'font-size': '15px', 'margin-bottom':25, 'margin-top':25})
+                    header_1 = html.H1(children=f'{Cocktail_Names[0]}', style={'textAlign': 'center', 'margin-bottom':25, 'margin-top':25})
+                    row_1 = html.Div(
+                        [
+                            dbc.Row(
+                                [
+                                    dbc.Col(html.Div([html.H2("Liquor"), html.P(f"{Liquor_Names[0]}")])),
+                                    dbc.Col(html.Div([html.H2("Garnish"), html.P(f"{Garnish_Names[0]}")])),
+                                    dbc.Col(html.Div([html.H2("Glassware"), html.P(f"{Glassware_Names[0]}")])),
+                                    dbc.Col(html.Div([html.H2("Source"), html.P(f"{Source_Names[0]}")])),
+                                ]
+                            ),
+                            html.Br(),
+                            dbc.Row(
+                                [
+                                    dbc.Col(html.Div(output_Ingredients_1)),
+                                    dbc.Col(html.Div(output_Instructions_1)),
+                                ]
+                            ),
+                        ]
+                    )
+                    header_2 = html.H1(children=f'{Cocktail_Names[1]}', style={'textAlign': 'center', 'margin-bottom':25, 'margin-top':25})
+                    row_2 = html.Div(
+                        [
+                            dbc.Row(
+                                [
+                                    dbc.Col(html.Div([html.H2("Liquor"), html.P(f"{Liquor_Names[1]}")])),
+                                    dbc.Col(html.Div([html.H2("Garnish"), html.P(f"{Garnish_Names[1]}")])),
+                                    dbc.Col(html.Div([html.H2("Glassware"), html.P(f"{Glassware_Names[1]}")])),
+                                    dbc.Col(html.Div([html.H2("Source"), html.P(f"{Source_Names[1]}")])),
+                                ]
+                            ),
+                            html.Br(),
+                            dbc.Row(
+                                [
+                                    dbc.Col(html.Div(output_Ingredients_2)),
+                                    dbc.Col(html.Div(output_Instructions_2)),
+                                ]
+                            ),
+                        ]
+                    )
+                    header_3 = html.H1(children=f'{Cocktail_Names[2]}', style={'textAlign': 'center', 'margin-bottom':25, 'margin-top':25})
+                    row_3 = html.Div(
+                        [
+                            dbc.Row(
+                                [
+                                    dbc.Col(html.Div([html.H2("Liquor"), html.P(f"{Liquor_Names[2]}")])),
+                                    dbc.Col(html.Div([html.H2("Garnish"), html.P(f"{Garnish_Names[2]}")])),
+                                    dbc.Col(html.Div([html.H2("Glassware"), html.P(f"{Glassware_Names[2]}")])),
+                                    dbc.Col(html.Div([html.H2("Source"), html.P(f"{Source_Names[2]}")])),
+                                ]
+                            ),
+                            html.Br(),
+                            dbc.Row(
+                                [
+                                    dbc.Col(html.Div(output_Ingredients_3)),
+                                    dbc.Col(html.Div(output_Instructions_3)),
+                                ]
+                            ),
+                        ]
+                    )
+                    result =  html.Div([input, row_break, header_1, row_1, row_break,
+                                                          header_2, row_2, row_break,
+                                                          header_3, row_3, row_break])
+                    return result  
 
 # https://dash-bootstrap-components.opensource.faculty.ai/docs/components/layout/
 # columns output for drinks
