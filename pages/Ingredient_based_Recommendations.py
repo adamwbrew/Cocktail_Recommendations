@@ -25,12 +25,6 @@ else:
     from pages.config import password
     from pages.config import server
 
-
-# from pages.config import database
-# from pages.config import username
-# from pages.config import password
-# from pages.config import server
-
 from pages.config import Garnishes
 from pages.config import Glassware
 from pages.config import Ingredients
@@ -181,7 +175,6 @@ def Similarity_Added_labels(df_drinks, drink_ingredients_list):
 
 # app - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 # link fontawesome 
-FA = "https://use.fontawesome.com/releases/v5.8.1/css/all.css"
 dash.register_page(__name__, path='/Ingredient_based_Recommendation')
 
 cocktail_names = list(set(Cocktails["Cocktail_Name"].tolist()))

@@ -176,7 +176,6 @@ def Similarity_Added_labels_Cocktail(df_drinks, drink_ingredients_list, cocktail
 
 # app - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 # link fontawesome 
-FA = "https://use.fontawesome.com/releases/v5.8.1/css/all.css"
 dash.register_page(__name__, path='/Cocktail_based_Recommendation')
 
 cocktail_names = list(set(Cocktails["Cocktail_Name"].tolist()))

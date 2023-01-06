@@ -2,7 +2,8 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import Input, Output, dcc, html
 
-app = dash.Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.DARKLY])
+FA = "https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+app = dash.Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.DARKLY, FA])
 server = app.server
 
 # the style arguments for the sidebar. We use position:fixed and a fixed width

@@ -91,7 +91,6 @@ Cocktails["Instructions"] = Cocktails.apply(lambda x : x["Instructions"].split("
 
 # app - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 # link fontawesome 
-FA = "https://use.fontawesome.com/releases/v5.8.1/css/all.css"
 dash.register_page(__name__, path='/Search')
 
 cocktail_names = list(set(Cocktails["Cocktail_Name"].tolist()))
