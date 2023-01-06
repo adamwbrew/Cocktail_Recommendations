@@ -24,7 +24,7 @@ else:
     from pages.config import password
     from pages.config import server
 
-from pages.config import Garnishes
+from config import Garnishes
 from pages.config import Glassware
 from pages.config import Ingredients
 from pages.config import Instructions
