@@ -20,7 +20,7 @@ if os.environ.get('ENV') == 'production':
 else:
     #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/flask-heroku'
     # import SQL database connection strings
-    from config import database
+    from pages.config import database
     from pages.config import username
     from pages.config import password
     from pages.config import server
