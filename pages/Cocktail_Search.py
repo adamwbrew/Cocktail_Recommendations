@@ -18,17 +18,6 @@ if os.environ.get('ENV') == 'production':
     password =  os.environ.get('PASSWORD')
     server =  os.environ.get('SERVER')
 
-    # Garnishes = os.environ.get('GARNISHES')
-    # Glassware = os.environ.get('GLASSWARE')
-    # Ingredients = os.environ.get('INGREDIENTS')
-    # Instructions = os.environ.get('INSTRUCTIONS')
-    # Instructions_by_Drink = os.environ.get('INSTRUCTION_BY_DRINK')
-    # Liquors = os.environ.get('LIQUORS')
-    # Measured_Ingredients = os.environ.get('MEASURED_INGREDIENTS')
-    # Measurements = os.environ.get('MEASUREMENTS')
-    # Recipes = os.environ.get('RECIPES')
-    # Sources = os.environ.get('SOURCES')
-
 else:
     #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/flask-heroku'
     # import SQL database connection strings
