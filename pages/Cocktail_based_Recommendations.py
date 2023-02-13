@@ -5,6 +5,8 @@ import dash_html_components as html
 import pandas as pd
 import pymssql
 import os
+import mysql.connector
+from mysql.connector import Error
 
 # import SQL database connection strings - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
@@ -40,7 +42,10 @@ from pages.config import Sources
 
 # Tables needed - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 try:
-    conn = pymssql.connect(server,username, password,database)
+    conn = mysql.connector.connect(host=f"{server}",
+                                         database=f"{database}",
+                                         user=f"{username}",
+                                         password=f"{password}")
 
     cursor = conn.cursor()
     query = f"""
@@ -64,9 +69,9 @@ try:
     INNER JOIN (SELECT DISTINCT
                 R.RecipeID,
                 R.Cocktail_Name,
-                STRING_AGG(ING.Ingredient_Name, '&,& ') AS Ingredients_List,
-                STRING_AGG(ING.IngredientID, '&,& ') AS IngredientsID_List,
-                STRING_AGG(CONCAT(M.Measurement_Amount,' ', ING.Ingredient_Name), '&,& ') AS Ingredients
+                GROUP_CONCAT(DISTINCT ING.Ingredient_Name ORDER BY ING.Ingredient_Name SEPARATOR '&,& ') AS Ingredients_List,
+                GROUP_CONCAT(DISTINCT ING.IngredientID ORDER BY ING.IngredientID SEPARATOR '&,& ') AS IngredientsID_List,
+                GROUP_CONCAT(DISTINCT CONCAT(M.Measurement_Amount,' ', ING.Ingredient_Name) SEPARATOR '&,& ') AS Ingredients
                 FROM {Recipes} AS R
             INNER JOIN {Liquors} AS L ON R.LiquorID = L.LiquorID
             INNER JOIN {Measured_Ingredients} AS MI ON R.RecipeID = MI.RecipeID
@@ -78,7 +83,7 @@ try:
     INNER JOIN (SELECT DISTINCT
                 R.RecipeID,
                 R.Cocktail_Name,
-                STRING_AGG(I.Instruction, '&,& ') WITHIN GROUP (ORDER BY I.Instruction) AS Instructions
+                GROUP_CONCAT(DISTINCT I.Instruction ORDER BY I.Instruction SEPARATOR '&,& ') AS Instructions
                 FROM {Recipes} AS R
             INNER JOIN {Instructions_by_Drink} AS ID ON R.RecipeID = ID.RecipeID
             INNER JOIN {Instructions} AS I ON ID.InstructionID = I.InstructionID
@@ -87,12 +92,16 @@ try:
     ORDER BY R.RecipeID, R.Cocktail_Name ASC;
     """
     Cocktails = pd.read_sql(query, conn)
-except Exception as e:
-    print(e)
+except Error as e:
+    print("Error while connecting to MySQL", e)
 
 
 try:
-    conn = pymssql.connect(server,username, password,database)
+    conn = mysql.connector.connect(host=f"{server}",
+                                         database=f"{database}",
+                                         user=f"{username}",
+                                         password=f"{password}")
+
 
     cursor = conn.cursor()
     Ingredient_query = f"""

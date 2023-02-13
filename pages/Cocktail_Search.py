@@ -5,7 +5,8 @@ import dash_html_components as html
 import pandas as pd
 import pymssql
 import os
-
+import mysql.connector
+from mysql.connector import Error
 
 # import SQL database connection strings - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
@@ -38,17 +39,25 @@ from pages.config import Recipes
 from pages.config import Sources
 
 
+
+# Tables needed - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 try:
-    conn = pymssql.connect(server,username, password,database)
+    conn = mysql.connector.connect(host=f"{server}",
+                                         database=f"{database}",
+                                         user=f"{username}",
+                                         password=f"{password}")
 
     cursor = conn.cursor()
     query = f"""
     SELECT DISTINCT
+        R.RecipeID,
         R.Cocktail_Name,
         L.Liquor_Name,
         Gl.Glassware_Name,
         G.Garnish_Name,
         S.Source,
+        MI.Ingredients_List,
+        MI.IngredientsID_List,
         MI.Ingredients,
         I.Instructions
         FROM {Recipes} AS R
@@ -58,29 +67,33 @@ try:
     INNER JOIN {Sources} AS S ON R.SourceID = S.SourceID
     -- Subquery of Measurements concatenated Ingredients in list form 
     INNER JOIN (SELECT DISTINCT
+                R.RecipeID,
                 R.Cocktail_Name,
-                STRING_AGG(CONCAT(M.Measurement_Amount,' ', ING.Ingredient_Name), '&,& ') AS Ingredients
+                GROUP_CONCAT(DISTINCT ING.Ingredient_Name ORDER BY ING.Ingredient_Name SEPARATOR '&,& ') AS Ingredients_List,
+                GROUP_CONCAT(DISTINCT ING.IngredientID ORDER BY ING.IngredientID SEPARATOR '&,& ') AS IngredientsID_List,
+                GROUP_CONCAT(DISTINCT CONCAT(M.Measurement_Amount,' ', ING.Ingredient_Name) SEPARATOR '&,& ') AS Ingredients
                 FROM {Recipes} AS R
             INNER JOIN {Liquors} AS L ON R.LiquorID = L.LiquorID
             INNER JOIN {Measured_Ingredients} AS MI ON R.RecipeID = MI.RecipeID
             INNER JOIN {Ingredients} AS ING ON MI.IngredientID = ING.IngredientID
             INNER JOIN {Measurements} AS M ON MI.MeasurementID = M.MeasurementID
-            GROUP BY R.Cocktail_Name)
+            GROUP BY R.RecipeID, R.Cocktail_Name)
         AS MI ON R.Cocktail_Name = MI.Cocktail_Name
     -- Subquery of Instructions in list form 
     INNER JOIN (SELECT DISTINCT
+                R.RecipeID,
                 R.Cocktail_Name,
-                STRING_AGG(I.Instruction, '&,& ') WITHIN GROUP (ORDER BY I.Instruction) AS Instructions
+                GROUP_CONCAT(DISTINCT I.Instruction ORDER BY I.Instruction SEPARATOR '&,& ') AS Instructions
                 FROM {Recipes} AS R
             INNER JOIN {Instructions_by_Drink} AS ID ON R.RecipeID = ID.RecipeID
             INNER JOIN {Instructions} AS I ON ID.InstructionID = I.InstructionID
-            GROUP BY R.Cocktail_Name)
+            GROUP BY R.RecipeID, R.Cocktail_Name)
         AS I ON R.Cocktail_Name = I.Cocktail_Name
-    ORDER BY R.Cocktail_Name ASC;
+    ORDER BY R.RecipeID, R.Cocktail_Name ASC;
     """
     Cocktails = pd.read_sql(query, conn)
-except Exception as e:
-    print(e)
+except Error as e:
+    print("Error while connecting to MySQL", e)
 
 Cocktails["Cocktail_Name"] = Cocktails["Cocktail_Name"].astype(str)
 Cocktails["Liquor_Name"] = Cocktails["Liquor_Name"].astype(str)

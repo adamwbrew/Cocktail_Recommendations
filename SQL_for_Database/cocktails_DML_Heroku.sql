@@ -1,7 +1,6 @@
 -- DML for Cocktails Database
 
-USE dmp84eqrjvyr1zp;
-GO
+USE CocktailsData;
 
 -- USE CocktailsData;
 -- GO
@@ -12,14 +11,14 @@ GO
 
 INSERT INTO Measurements(Measurement_Amount)
     SELECT DISTINCT Measurement_1
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Measurement_Amount
                         FROM Measurements
                         WHERE CD.Measurement_1 = Measurements.Measurement_Amount);
 
 INSERT INTO Measurements(Measurement_Amount)
     SELECT DISTINCT Measurement_2
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Measurement_Amount
                         FROM Measurements
                         WHERE CD.Measurement_2 = Measurements.Measurement_Amount)
@@ -27,15 +26,15 @@ INSERT INTO Measurements(Measurement_Amount)
 
 INSERT INTO Measurements(Measurement_Amount)
     SELECT DISTINCT Measurement_3
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Measurement_Amount
                         FROM Measurements
                         WHERE CD.Measurement_3 = Measurements.Measurement_Amount)
     AND CD.Measurement_3 IS NOT NULL;
 
-    INSERT INTO Measurements(Measurement_Amount)
+INSERT INTO Measurements(Measurement_Amount)
     SELECT DISTINCT Measurement_4
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Measurement_Amount
                         FROM Measurements
                         WHERE CD.Measurement_4 = Measurements.Measurement_Amount)
@@ -43,7 +42,7 @@ INSERT INTO Measurements(Measurement_Amount)
 
 INSERT INTO Measurements(Measurement_Amount)
     SELECT DISTINCT Measurement_5
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Measurement_Amount
                         FROM Measurements
                         WHERE CD.Measurement_5 = Measurements.Measurement_Amount)
@@ -51,7 +50,7 @@ INSERT INTO Measurements(Measurement_Amount)
 
 INSERT INTO Measurements(Measurement_Amount)
     SELECT DISTINCT Measurement_6
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Measurement_Amount
                         FROM Measurements
                         WHERE CD.Measurement_6 = Measurements.Measurement_Amount)
@@ -59,7 +58,7 @@ INSERT INTO Measurements(Measurement_Amount)
 
 INSERT INTO Measurements(Measurement_Amount)
     SELECT DISTINCT Measurement_7
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Measurement_Amount
                         FROM Measurements
                         WHERE CD.Measurement_7 = Measurements.Measurement_Amount)
@@ -67,7 +66,7 @@ INSERT INTO Measurements(Measurement_Amount)
 
 INSERT INTO Measurements(Measurement_Amount)
     SELECT DISTINCT Measurement_8
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Measurement_Amount
                         FROM Measurements
                         WHERE CD.Measurement_8 = Measurements.Measurement_Amount)
@@ -75,15 +74,15 @@ INSERT INTO Measurements(Measurement_Amount)
 
 INSERT INTO Measurements(Measurement_Amount)
     SELECT DISTINCT Measurement_9
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Measurement_Amount
                         FROM Measurements
                         WHERE CD.Measurement_9 = Measurements.Measurement_Amount)
     AND CD.Measurement_9 IS NOT NULL;
 
-    INSERT INTO Measurements(Measurement_Amount)
+INSERT INTO Measurements(Measurement_Amount)
     SELECT DISTINCT Measurement_10
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Measurement_Amount
                         FROM Measurements
                         WHERE CD.Measurement_10 = Measurements.Measurement_Amount)
@@ -91,7 +90,7 @@ INSERT INTO Measurements(Measurement_Amount)
 
 INSERT INTO Measurements(Measurement_Amount)
     SELECT DISTINCT Measurement_11
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Measurement_Amount
                         FROM Measurements
                         WHERE CD.Measurement_11 = Measurements.Measurement_Amount)
@@ -99,7 +98,7 @@ INSERT INTO Measurements(Measurement_Amount)
 
 INSERT INTO Measurements(Measurement_Amount)
     SELECT DISTINCT Measurement_12
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Measurement_Amount
                         FROM Measurements
                         WHERE CD.Measurement_12 = Measurements.Measurement_Amount)
@@ -107,7 +106,7 @@ INSERT INTO Measurements(Measurement_Amount)
 
 INSERT INTO Measurements(Measurement_Amount)
     SELECT DISTINCT Measurement_13
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Measurement_Amount
                         FROM Measurements
                         WHERE CD.Measurement_13 = Measurements.Measurement_Amount)
@@ -118,14 +117,14 @@ INSERT INTO Measurements(Measurement_Amount)
 
 INSERT INTO Ingredients(Ingredient_Name)
     SELECT DISTINCT Ingredient_1
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Ingredient_Name
                         FROM Ingredients
                         WHERE CD.Ingredient_1 = Ingredients.Ingredient_Name);
 
 INSERT INTO Ingredients(Ingredient_Name)
     SELECT DISTINCT Ingredient_2
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Ingredient_Name
                         FROM Ingredients
                         WHERE CD.Ingredient_2 = Ingredients.Ingredient_Name)
@@ -133,7 +132,7 @@ INSERT INTO Ingredients(Ingredient_Name)
 
 INSERT INTO Ingredients(Ingredient_Name)
     SELECT DISTINCT Ingredient_3
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Ingredient_Name
                         FROM Ingredients
                         WHERE CD.Ingredient_3 = Ingredients.Ingredient_Name)
@@ -141,7 +140,7 @@ INSERT INTO Ingredients(Ingredient_Name)
 
 INSERT INTO Ingredients(Ingredient_Name)
     SELECT DISTINCT Ingredient_4
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Ingredient_Name
                         FROM Ingredients
                         WHERE CD.Ingredient_4 = Ingredients.Ingredient_Name)
@@ -149,7 +148,7 @@ INSERT INTO Ingredients(Ingredient_Name)
 
 INSERT INTO Ingredients(Ingredient_Name)
     SELECT DISTINCT Ingredient_5
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Ingredient_Name
                         FROM Ingredients
                         WHERE CD.Ingredient_5 = Ingredients.Ingredient_Name)
@@ -157,7 +156,7 @@ INSERT INTO Ingredients(Ingredient_Name)
 
 INSERT INTO Ingredients(Ingredient_Name)
     SELECT DISTINCT Ingredient_6
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Ingredient_Name
                         FROM Ingredients
                         WHERE CD.Ingredient_6 = Ingredients.Ingredient_Name)
@@ -165,7 +164,7 @@ INSERT INTO Ingredients(Ingredient_Name)
 
 INSERT INTO Ingredients(Ingredient_Name)
     SELECT DISTINCT Ingredient_7
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Ingredient_Name
                         FROM Ingredients
                         WHERE CD.Ingredient_7 = Ingredients.Ingredient_Name)
@@ -173,7 +172,7 @@ INSERT INTO Ingredients(Ingredient_Name)
 
 INSERT INTO Ingredients(Ingredient_Name)
     SELECT DISTINCT Ingredient_8
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Ingredient_Name
                         FROM Ingredients
                         WHERE CD.Ingredient_8 = Ingredients.Ingredient_Name)
@@ -181,7 +180,7 @@ INSERT INTO Ingredients(Ingredient_Name)
 
 INSERT INTO Ingredients(Ingredient_Name)
     SELECT DISTINCT Ingredient_9
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Ingredient_Name
                         FROM Ingredients
                         WHERE CD.Ingredient_9 = Ingredients.Ingredient_Name)
@@ -189,7 +188,7 @@ INSERT INTO Ingredients(Ingredient_Name)
 
 INSERT INTO Ingredients(Ingredient_Name)
     SELECT DISTINCT Ingredient_10
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Ingredient_Name
                         FROM Ingredients
                         WHERE CD.Ingredient_10 = Ingredients.Ingredient_Name)
@@ -197,7 +196,7 @@ INSERT INTO Ingredients(Ingredient_Name)
 
     INSERT INTO Ingredients(Ingredient_Name)
     SELECT DISTINCT Ingredient_11
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Ingredient_Name
                         FROM Ingredients
                         WHERE CD.Ingredient_11 = Ingredients.Ingredient_Name)
@@ -205,7 +204,7 @@ INSERT INTO Ingredients(Ingredient_Name)
 
 INSERT INTO Ingredients(Ingredient_Name)
     SELECT DISTINCT Ingredient_12
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Ingredient_Name
                         FROM Ingredients
                         WHERE CD.Ingredient_12 = Ingredients.Ingredient_Name)
@@ -213,7 +212,7 @@ INSERT INTO Ingredients(Ingredient_Name)
 
 INSERT INTO Ingredients(Ingredient_Name)
     SELECT DISTINCT Ingredient_13
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Ingredient_Name
                         FROM Ingredients
                         WHERE CD.Ingredient_13 = Ingredients.Ingredient_Name)
@@ -224,14 +223,14 @@ INSERT INTO Ingredients(Ingredient_Name)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_1
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_1 = Instructions.Instruction);
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_2
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_2 = Instructions.Instruction)
@@ -239,7 +238,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_3
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_3 = Instructions.Instruction)
@@ -247,7 +246,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_4
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_4 = Instructions.Instruction)
@@ -255,7 +254,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_5
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_5 = Instructions.Instruction)
@@ -263,7 +262,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_6
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_6 = Instructions.Instruction)
@@ -271,7 +270,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_7
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_7 = Instructions.Instruction)
@@ -279,7 +278,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_8
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_8 = Instructions.Instruction)
@@ -287,7 +286,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_9
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_9 = Instructions.Instruction)
@@ -295,7 +294,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_10
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_10 = Instructions.Instruction)
@@ -303,7 +302,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_11
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_11 = Instructions.Instruction)
@@ -311,7 +310,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_12
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_12 = Instructions.Instruction)
@@ -319,7 +318,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_13
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_13 = Instructions.Instruction)
@@ -327,7 +326,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_14
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_14 = Instructions.Instruction)
@@ -335,7 +334,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_15
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_15 = Instructions.Instruction)
@@ -343,7 +342,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_16
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_16 = Instructions.Instruction)
@@ -351,7 +350,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_17
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_17 = Instructions.Instruction)
@@ -359,7 +358,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_18
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_18 = Instructions.Instruction)
@@ -367,7 +366,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_19
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_19 = Instructions.Instruction)
@@ -375,7 +374,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_20
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_20 = Instructions.Instruction)
@@ -383,7 +382,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_21
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_21 = Instructions.Instruction)
@@ -391,7 +390,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Instructions(Instruction)
     SELECT DISTINCT Instruction_22
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Instruction
                         FROM Instructions
                         WHERE CD.Instruction_22 = Instructions.Instruction)
@@ -402,7 +401,7 @@ INSERT INTO Instructions(Instruction)
 
 INSERT INTO Liquors(Liquor_Name)
     SELECT DISTINCT Liquor
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Liquor_Name
                         FROM Liquors
                         WHERE CD.Liquor = Liquors.Liquor_Name);
@@ -412,7 +411,7 @@ INSERT INTO Liquors(Liquor_Name)
 
 INSERT INTO Glassware(Glassware_Name)
     SELECT DISTINCT Glassware
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Glassware_Name
                         FROM Glassware
                         WHERE CD.Glassware = Glassware.Glassware_Name);
@@ -422,7 +421,7 @@ INSERT INTO Glassware(Glassware_Name)
 
 INSERT INTO Garnishes(Garnish_Name)
     SELECT DISTINCT Garnish
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Garnish_Name
                         FROM Garnishes
                         WHERE CD.Garnish = Garnishes.Garnish_Name);
@@ -432,7 +431,7 @@ INSERT INTO Garnishes(Garnish_Name)
 
 INSERT INTO Sources(Source)
     SELECT DISTINCT Original_Source
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     WHERE NOT EXISTS (SELECT Source
                         FROM Sources
                         WHERE CD.Original_Source = Sources.Source);
@@ -447,11 +446,11 @@ INSERT INTO Recipes(Cocktail_Name, LiquorID, GlasswareID, GarnishID, SourceID)
         Gl.GlasswareID,
         G.GarnishID,
         S.SourceID
-    FROM dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD
+    FROM Master.CocktailsDenormalized AS CD
     INNER JOIN Liquors AS L ON CD.Liquor = L.Liquor_Name
-    INNER JOIN Glassware AS GL ON CD.Glassware = Gl.Glassware_Name
+    INNER JOIN Glassware AS Gl ON CD.Glassware = Gl.Glassware_Name
     INNER JOIN Garnishes AS G ON CD.Garnish = G.Garnish_Name
-    INNER JOIN Sources AS S ON CD.Original_Source = S.Source
+    INNER JOIN Sources AS S ON CD.Original_Source = S.Source;
 
 
 -- Instructions_by_Drink Added - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -465,7 +464,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -481,7 +480,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -497,7 +496,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -513,7 +512,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -529,7 +528,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -545,7 +544,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -561,7 +560,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -577,14 +576,14 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
         AND S.Source = CD.Original_Source
     INNER JOIN Instructions AS I ON CD.Instruction_8 = I.Instruction;
 
-    INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
+INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     SELECT 
     I.InstructionID,
     R.RecipeID
@@ -593,7 +592,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -609,7 +608,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -625,7 +624,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -641,14 +640,14 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
         AND S.Source = CD.Original_Source
     INNER JOIN Instructions AS I ON CD.Instruction_12 = I.Instruction;
 
-    INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
+INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     SELECT 
     I.InstructionID,
     R.RecipeID
@@ -657,7 +656,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -673,7 +672,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -689,7 +688,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -705,14 +704,14 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
         AND S.Source = CD.Original_Source
     INNER JOIN Instructions AS I ON CD.Instruction_16 = I.Instruction;
 
-    INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
+INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     SELECT 
     I.InstructionID,
     R.RecipeID
@@ -721,7 +720,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -737,7 +736,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -753,7 +752,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -769,7 +768,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -785,7 +784,7 @@ INSERT INTO Instructions_by_Drink(InstructionID, RecipeID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -804,7 +803,7 @@ INSERT INTO Measured_Ingredients(RecipeID, IngredientID, MeasurementID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -822,7 +821,7 @@ INSERT INTO Measured_Ingredients(RecipeID, IngredientID, MeasurementID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -840,7 +839,7 @@ INSERT INTO Measured_Ingredients(RecipeID, IngredientID, MeasurementID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -858,7 +857,7 @@ INSERT INTO Measured_Ingredients(RecipeID, IngredientID, MeasurementID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -876,7 +875,7 @@ INSERT INTO Measured_Ingredients(RecipeID, IngredientID, MeasurementID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -894,7 +893,7 @@ INSERT INTO Measured_Ingredients(RecipeID, IngredientID, MeasurementID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -912,7 +911,7 @@ INSERT INTO Measured_Ingredients(RecipeID, IngredientID, MeasurementID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -930,7 +929,7 @@ INSERT INTO Measured_Ingredients(RecipeID, IngredientID, MeasurementID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -948,7 +947,7 @@ INSERT INTO Measured_Ingredients(RecipeID, IngredientID, MeasurementID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -966,7 +965,7 @@ INSERT INTO Measured_Ingredients(RecipeID, IngredientID, MeasurementID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -984,7 +983,7 @@ INSERT INTO Measured_Ingredients(RecipeID, IngredientID, MeasurementID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -1002,7 +1001,7 @@ INSERT INTO Measured_Ingredients(RecipeID, IngredientID, MeasurementID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
@@ -1010,7 +1009,7 @@ INSERT INTO Measured_Ingredients(RecipeID, IngredientID, MeasurementID)
     INNER JOIN Ingredients AS I ON CD.Ingredient_12 = I.Ingredient_Name
     INNER JOIN Measurements AS M ON CD.Measurement_12 = M.Measurement_Amount;
 
-    INSERT INTO Measured_Ingredients(RecipeID, IngredientID, MeasurementID)
+INSERT INTO Measured_Ingredients(RecipeID, IngredientID, MeasurementID)
     SELECT 
         R.RecipeID,
         I.IngredientID,
@@ -1020,48 +1019,10 @@ INSERT INTO Measured_Ingredients(RecipeID, IngredientID, MeasurementID)
     INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
     INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
     INNER JOIN Sources AS S ON R.SourceID = S.SourceID
-    INNER JOIN dmp84eqrjvyr1zp.dbo.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
+    INNER JOIN Master.CocktailsDenormalized AS CD ON R.Cocktail_Name = CD.Cocktail_Name 
         AND L.Liquor_Name = CD.Liquor 
         AND Gl.Glassware_Name = CD.Glassware 
         AND G.Garnish_Name = CD.Garnish
         AND S.Source = CD.Original_Source
     INNER JOIN Ingredients AS I ON CD.Ingredient_13 = I.Ingredient_Name
     INNER JOIN Measurements AS M ON CD.Measurement_13 = M.Measurement_Amount;
-
-
--- Full Dataset - - - - - - - - - - - -
-SELECT DISTINCT
-    R.Cocktail_Name,
-    L.Liquor_Name,
-    Gl.Glassware_Name,
-    G.Garnish_Name,
-    S.Source,
-    MI.Ingredients,
-    I.Instructions
-    FROM Recipes AS R
-INNER JOIN Liquors AS L ON R.LiquorID = L.LiquorID
-INNER JOIN Glassware AS Gl ON R.GlasswareID = Gl.GlasswareID
-INNER JOIN Garnishes AS G ON R.GarnishID = G.GarnishID
-INNER JOIN Sources AS S ON R.SourceID = S.SourceID
--- Subquery of Measurements concatenated Ingredients in list form 
-INNER JOIN (SELECT DISTINCT
-                R.Cocktail_Name,
-                STRING_AGG(CONCAT(M.Measurement_Amount,' ', ING.Ingredient_Name), ', ') AS Ingredients
-                FROM Recipes AS R
-            INNER JOIN Liquors AS L ON R.LiquorID = L.LiquorID
-            INNER JOIN Measured_Ingredients AS MI ON R.RecipeID = MI.RecipeID
-            INNER JOIN Ingredients AS ING ON MI.IngredientID = ING.IngredientID
-            INNER JOIN Measurements AS M ON MI.MeasurementID = M.MeasurementID
-            GROUP BY R.Cocktail_Name)
-    AS MI ON R.Cocktail_Name = MI.Cocktail_Name
--- Subquery of Instructions in list form 
-INNER JOIN (SELECT DISTINCT
-                R.Cocktail_Name,
-                STRING_AGG(I.Instruction, ', ') WITHIN GROUP (ORDER BY I.Instruction) AS Instructions
-                -- I.Instruction
-                FROM Recipes AS R
-            INNER JOIN Instructions_by_Drink AS ID ON R.RecipeID = ID.RecipeID
-            INNER JOIN Instructions AS I ON ID.InstructionID = I.InstructionID
-            GROUP BY R.Cocktail_Name)
-    AS I ON R.Cocktail_Name = I.Cocktail_Name
-ORDER BY R.Cocktail_Name ASC;
