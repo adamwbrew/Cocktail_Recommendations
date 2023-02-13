@@ -110,7 +110,7 @@ try:
     ORDER BY ING.Ingredient_Name ASC
     """
     Ingredient_query = pd.read_sql(Ingredient_query, conn)
-except Exception as e:
+except Error as e:
     print(e)
 
 
