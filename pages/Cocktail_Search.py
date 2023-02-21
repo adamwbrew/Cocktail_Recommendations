@@ -5,8 +5,7 @@ import dash_html_components as html
 import pandas as pd
 import pymssql
 import os
-import mysql.connector
-from mysql.connector import Error
+import MySQLdb
 
 # import SQL database connection strings - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
@@ -42,7 +41,7 @@ from pages.config import Sources
 
 # Tables needed - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 try:
-    conn = mysql.connector.connect(host=f"{server}",
+    conn = MySQLdb.connect(host=f"{server}",
                                          database=f"{database}",
                                          user=f"{username}",
                                          password=f"{password}")
@@ -92,7 +91,7 @@ try:
     ORDER BY R.RecipeID, R.Cocktail_Name ASC;
     """
     Cocktails = pd.read_sql(query, conn)
-except Error as e:
+except MySQLdb.Error as e:
     print("Error while connecting to MySQL", e)
 
 Cocktails["Cocktail_Name"] = Cocktails["Cocktail_Name"].astype(str)
