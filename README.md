@@ -5,8 +5,7 @@ Welcome to our cocktail information and recommendation app! Are you tired of ord
 Our app features three powerful tools that can help you find the perfect cocktail recipe: 
             
 
-* #### **Cocktail Search**:
-The Cocktail Search page is a powerful tool that allows you to search through our comprehensive database of cocktail recipes. You'll find information on the main liquor used, a list of ingredients, instructions on how to make the cocktail, preferred glassware, garnishes, and the source of the recipe, if known.
+* #### **Cocktail Search**:<br>The Cocktail Search page is a powerful tool that allows you to search through our comprehensive database of cocktail recipes. You'll find information on the main liquor used, a list of ingredients, instructions on how to make the cocktail, preferred glassware, garnishes, and the source of the recipe, if known.
 
             
 * #### **Cocktail Based Recommendations**:
