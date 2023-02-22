@@ -193,7 +193,8 @@ cocktail_names.sort()
 
 # app for cocktail search with all information formatted
 layout = html.Div(children=[
-    html.H1(children='Cocktail Based Recommendations', style={'textAlign': 'center', 'font-size': '50px', 'text-decoration': 'underline', 'margin-bottom':25, 'margin-top':25}),
+    html.H1(children='Cocktail Based Recommendations', style={'textAlign': 'center', 'margin-bottom':25, 'margin-top':25}),
+    html.P(children = "This page lets you easily find new cocktail recommendations based on your existing preferences. Simply input one or more cocktails that you already enjoy, and our app will generate three personalized cocktail recommendations tailored to your tastes."),
     # Cocktail Relay System
     html.Div([
         # Drop down for cocktails

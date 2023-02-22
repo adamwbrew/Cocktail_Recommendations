@@ -193,7 +193,8 @@ Ingredient_query.sort()
 
 # app for cocktail search with all information formatted
 layout = html.Div(children=[
-    html.H1(children='Ingredient Based Recommendations', style={'textAlign': 'center', 'font-size': '50px', 'text-decoration': 'underline', 'margin-bottom':25, 'margin-top':25}),
+    html.H1(children='Ingredient Based Recommendations', style={'textAlign': 'center','margin-bottom':25, 'margin-top':25}),
+    html.P(children = "This page is a great way to discover new cocktails based on the specific ingredients you're in the mood for. Simply enter one or more ingredients that you'd like to include in your cocktail, and our app will provide you with three personalized cocktail recommendations that match your preferences."),
     # Cocktail Relay System
     html.Div([
         dcc.Textarea(

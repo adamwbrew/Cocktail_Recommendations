@@ -112,7 +112,8 @@ cocktail_names.sort()
 
 # app for cocktail search with all information formatted
 layout = html.Div(children=[
-    html.H1(children='Search for a Cocktail', style={'textAlign': 'center', 'font-size': '50px', 'text-decoration': 'underline', 'margin-bottom':25, 'margin-top':25}),
+    html.H1(children='Search for a Cocktail', style={'textAlign': 'center','margin-bottom':25, 'margin-top':25}),
+    html.P(children = "This page  is a powerful tool that allows you to search through our comprehensive database of cocktail recipes. You'll find information on the main liquor used, a list of ingredients, instructions on how to make the cocktail, preferred glassware, garnishes, and the source of the recipe, if known."),
     # Cocktail Relay System
     html.Div([
         dcc.Dropdown(options=cocktail_names,
