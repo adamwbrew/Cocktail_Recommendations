@@ -32,8 +32,8 @@ app.layout = dbc.Container([
                 dbc.Row(
                     [
                         dbc.Col(
-                            html.Img(src="assets/logo_DARKLY.png", height="150px"),
-                            width="auto"
+                            html.Img(src="assets/logo_DARKLY.png", height="150px", id="logo"),
+                            width="auto",
                         ),
                         dbc.Col(
                             dbc.Nav(
@@ -49,16 +49,35 @@ app.layout = dbc.Container([
                     ],
                     justify="center",  # Add this property to center the image
                     align="center",
-                )
-            ]
+                ),
+            ],
+            fluid=True,  # Add this property to make the container full-width on small devices
         ),
         color="dark",
         dark=True,
         className="mb-5",
-        sticky="top"
+        sticky="top",
     ),
     dash.page_container
 ])
+
+# Add this CSS code to set the height of the logo to 100px on small devices
+app.clientside_callback(
+    """
+    function(width) {
+        if (width <= 576) {
+            document.getElementById("logo").height = "100px";
+        } else {
+            document.getElementById("logo").height = "150px";
+        }
+    }
+    """,
+    Output("logo", "children"),
+    [Input("window-width", "innerWidth")]
+)
+
+# Add this hidden div to get the current window width
+app.layout.append(dbc.Input(id="window-width", type="hidden"))
 
 
 if __name__ == '__main__':

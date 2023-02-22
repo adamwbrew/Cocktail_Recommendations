@@ -6,7 +6,6 @@ import dash_bootstrap_components as dbc
 dash.register_page(__name__, path='/')
 
 layout = html.Div(children=[
-    html.H1(children='Home page'),
 
     html.Div(children=[
                 
@@ -14,7 +13,7 @@ layout = html.Div(children=[
              '''
             Welcome to our cocktail information and recommendation app! Are you tired of ordering the same old drink every time you go out? Do you want to try new and exciting cocktail recipes that match your taste preferences? Look no further! Our app is here to help you discover and enjoy delicious cocktails that are perfect for you.
 
-            Our app features three powerful tools that can help you find the perfect cocktail recipe:
+            Our app features three powerful tools that can help you find the perfect cocktail recipe: 
             
 
             * #### **Cocktail Search**:
@@ -30,7 +29,7 @@ layout = html.Div(children=[
             
             We're excited to help you discover new and exciting cocktail recipes that you'll love. So go ahead, explore our app, and let us know if you have any questions or feedback. Cheers!
             '''
-            )
-    ]),
+            ),
+    ], style={'fontSize': '20px'}),
 
 ])
