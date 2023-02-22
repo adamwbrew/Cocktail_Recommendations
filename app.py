@@ -9,24 +9,6 @@ app = dash.Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.DARKL
 server = app.server
 
 
-# the styles for the main content position it to the right of the sidebar and
-# add some padding.
-
-
-
-# app.layout = dbc.Container([
-#     dbc.NavbarSimple([
-#         dbc.NavItem(dbc.NavLink(page['name'].title(), href=page['path']))
-#         for page in dash.page_registry.values()
-#     ], 
-#     dark = True,
-#     color = "dark",
-#     expand = "lg",
-#     sticky = "top"
-#     ),
-#     dash.page_container
-# ])
-
 app.layout = dbc.Container([
     dbc.Navbar(
         dbc.Container(
@@ -34,7 +16,7 @@ app.layout = dbc.Container([
                 dbc.Row(
                     [
                         dbc.Col(
-                            html.Img(src="assets/logo_DARKLY.png", height="150px"),
+                            html.Img(src="assets/Logo_DARKLY.png", height="150px"),
                             width="auto",
                         ),
                         dbc.Col(
