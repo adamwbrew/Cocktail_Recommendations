@@ -19,5 +19,6 @@ Please note that due to the lack of proper instructions for some cocktails, the 
 If you have any questions or feedback, please don't hesitate to contact us. We're always happy to hear from our users. And if you're interested in using our app, check out the QR code below.
 
 Cheers, and happy cocktail-making!
-
+<p align="center">
 <img src="assets/QR_Heroku.png" width=50% height="50%" margin="auto">
+</p>
