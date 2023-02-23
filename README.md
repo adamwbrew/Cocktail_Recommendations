@@ -16,9 +16,9 @@ We're excited to help you discover new and exciting cocktail recipes that you'll
 
 Please note that due to the lack of proper instructions for some cocktails, the instructions to create certain cocktails may not be properly constructed. However, we're constantly working to improve our database and update our instructions.
 
-If you have any questions or feedback, please don't hesitate to contact us. We're always happy to hear from our users. And if you're interested in using our app, check out the QR code below.
+If you have any questions or feedback, please don't hesitate to contact us. We're always happy to hear from our users. And if you're interested in using our app, click or scan the QR code below.
 
 Cheers, and happy cocktail-making!
 <p align="center">
-<img src="assets/QR_Heroku.png" width=50% height="50%" margin="auto">
+<a href="https://cocktail-recommendations.herokuapp.com/"><img src="assets/QR_Heroku.png" width=50% height="50%" margin="auto"></a>
 </p>
