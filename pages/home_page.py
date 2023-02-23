@@ -11,7 +11,9 @@ layout = html.Div(children=[
                 
         dcc.Markdown(
              '''
-            Welcome to our cocktail information and recommendation app! Are you tired of ordering the same old drink every time you go out? Do you want to try new and exciting cocktail recipes that match your taste preferences? Look no further! Our app is here to help you discover and enjoy delicious cocktails that are perfect for you.
+            Welcome to our cocktail information and recommendation app!
+
+            Are you tired of ordering the same old drink every time you go out? Do you want to try new and exciting cocktail recipes that match your taste preferences? Look no further! Our app is here to help you discover and enjoy delicious cocktails that are perfect for you.
 
             Our app features three powerful tools that can help you find the perfect cocktail recipe: 
             
@@ -27,7 +29,13 @@ layout = html.Div(children=[
             * #### **Ingredient Based Recommendations**:
             The Ingredient Based Recommendations page is a great way to discover new cocktails based on the specific ingredients you're in the mood for. Simply enter one or more ingredients that you'd like to include in your cocktail, and our app will provide you with three personalized cocktail recommendations that match your preferences.
             
-            We're excited to help you discover new and exciting cocktail recipes that you'll love. So go ahead, explore our app, and let us know if you have any questions or feedback. Below is a QR code to view the GitHub reposity which holds all our code if you're interested in learning about how this website was made. Cheers!
+            We're excited to help you discover new and exciting cocktail recipes that you'll love. Our app is easy to use and provides detailed information on each recipe, so you can create your perfect drink at home or order confidently at the bar.
+
+            Please note that due to the lack of proper instructions for some cocktails, the instructions to create certain cocktails may not be properly constructed. However, we're constantly working to improve our database and update our instructions.
+
+            If you have any questions or feedback, please don't hesitate to contact us. We're always happy to hear from our users. And if you're interested in learning about how our app was made, check out our GitHub repository using the QR code below.
+
+            Cheers, and happy cocktail-making!
             '''
             ),
 
