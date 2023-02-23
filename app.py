@@ -16,7 +16,7 @@ app.layout = dbc.Container(className="mt-4 mb-4", children=[
                 dbc.Row(
                     [
                         dbc.Col(
-                            html.Img(id='logo', src="assets/Logo_DARKLY.png", height="150px"),
+                            html.Div(id='logo'),
                             width="auto",
                         ),
                         dbc.Col(
@@ -46,13 +46,13 @@ app.layout = dbc.Container(className="mt-4 mb-4", children=[
     dash.page_container
 ])
 
-@app.callback(Output('logo', 'height'),
+@app.callback(Output('logo', 'children'),
               [Input('url', 'pathname')])
 def update_logo_height(pathname):
     if 'mobile' in pathname:
-        return '100px'
+        return html.Img(src="assets/Logo_DARKLY.png", height="100px")
     else:
-        return '150px'
+        return html.Img(src="assets/Logo_DARKLY.png", height="150px")
 
 if __name__ == '__main__':
     app.run_server(debug=True)
