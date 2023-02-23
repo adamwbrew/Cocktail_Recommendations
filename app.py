@@ -1,6 +1,8 @@
 import dash
 import dash_bootstrap_components as dbc
 from dash import Input, Output, dcc, html
+from user_agents import parse
+from flask import request
 
 FA = "https://use.fontawesome.com/releases/v5.8.1/css/all.css"
 app = dash.Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.DARKLY, FA],
@@ -49,7 +51,8 @@ app.layout = dbc.Container(className="mt-4 mb-4", children=[
 @app.callback(Output('logo', 'children'),
               [Input('url', 'pathname')])
 def update_logo_height(pathname):
-    if 'mobile' in pathname:
+    user_agent = parse(request.headers['User-Agent'])
+    if user_agent.is_mobile:
         return html.Img(src="assets/Logo_DARKLY.png", height="100px")
     else:
         return html.Img(src="assets/Logo_DARKLY.png", height="150px")
