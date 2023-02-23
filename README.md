@@ -20,4 +20,4 @@ If you have any questions or feedback, please don't hesitate to contact us. We'r
 
 Cheers, and happy cocktail-making!
 
-![QR_Heroku](https://user-images.githubusercontent.com/104226913/221035471-d7bb571a-5851-449c-83d0-17785dcd9f59.png)
+<img src="assets/QR_Heroku.png"  width="60%" height="30%">
