@@ -20,4 +20,4 @@ If you have any questions or feedback, please don't hesitate to contact us. We'r
 
 Cheers, and happy cocktail-making!
 
-<img src="assets/QR_Heroku.png"  width="60%" height="30%">
+<img src="assets/QR_Heroku.png" height="30%">
