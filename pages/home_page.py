@@ -27,9 +27,11 @@ layout = html.Div(children=[
             * #### **Ingredient Based Recommendations**:
             The Ingredient Based Recommendations page is a great way to discover new cocktails based on the specific ingredients you're in the mood for. Simply enter one or more ingredients that you'd like to include in your cocktail, and our app will provide you with three personalized cocktail recommendations that match your preferences.
             
-            We're excited to help you discover new and exciting cocktail recipes that you'll love. So go ahead, explore our app, and let us know if you have any questions or feedback. Cheers!
+            We're excited to help you discover new and exciting cocktail recipes that you'll love. So go ahead, explore our app, and let us know if you have any questions or feedback. Below is a QR code to view the GitHub reposity which holds all our code if you're interested in learning about how this website was made. Cheers!
             '''
             ),
-    ], style={'fontSize': '20px'}),
 
+    ], style={'fontSize': '20px'}),
+    html.Br(),
+    html.Div([html.Img(src="assets/QR_Git.png", height="200px")], style={'textAlign':'center'})
 ])

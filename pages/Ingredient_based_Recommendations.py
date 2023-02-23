@@ -218,6 +218,29 @@ def list_formatter(list_):
             result += str(i).title() + "\n"
     return result
 
+def sort_instructions(instructions):
+    output = []
+    unknown_step = []
+    for intruction in instructions:
+        prep_test = intruction.split(":")[0].lower()
+        if(prep_test == "prep"):
+            output.append(intruction)
+        elif(prep_test.isdigit() == False):
+            if(unknown_step == []):
+                unknown_step.append("Steps included but with unknown order:")
+            unknown_step.append(intruction)
+    removed_prep = instructions.copy()
+    if(output != []):
+        removed_prep.remove(output[0])
+    if(unknown_step[1:] != []):
+        for i in unknown_step[1:]:
+            removed_prep.remove(i)
+    removed_prep.sort(key = lambda x : x.split(":")[0].zfill(2))
+    for instruction in removed_prep:
+        output.append(instruction)
+    output += unknown_step
+    return output
+
 @callback(
     Output('textarea-state-example-output', 'children'),
     Input('textarea-state-example-button', 'n_clicks'),
@@ -251,6 +274,7 @@ def update_output(n_clicks, value_1):
                     for i in range(len(Ingredients_Names[0])):
                         output_Ingredients_1 += [html.P(children = f"{Ingredients_Names[0][i]}")]
                     output_Instructions_1 = [html.H2("Instructions")]
+                    Instructions_Names[0] = sort_instructions(Instructions_Names[0])
                     for i in range(len(Instructions_Names[0])):
                         output_Instructions_1 += [html.P(children = f"{Instructions_Names[0][i]}")]
 
@@ -258,6 +282,7 @@ def update_output(n_clicks, value_1):
                     for i in range(len(Ingredients_Names[1])):
                         output_Ingredients_2 += [html.P(children = f"{Ingredients_Names[1][i]}")]
                     output_Instructions_2 = [html.H2("Instructions")]
+                    Instructions_Names[1] = sort_instructions(Instructions_Names[1])
                     for i in range(len(Instructions_Names[1])):
                         output_Instructions_2 += [html.P(children = f"{Instructions_Names[1][i]}")]
 
@@ -265,6 +290,7 @@ def update_output(n_clicks, value_1):
                     for i in range(len(Ingredients_Names[2])):
                         output_Ingredients_3 += [html.P(children = f"{Ingredients_Names[2][i]}")]
                     output_Instructions_3 = [html.H2("Instructions")]
+                    Instructions_Names[2] = sort_instructions(Instructions_Names[2])
                     for i in range(len(Instructions_Names[2])):
                         output_Instructions_3 += [html.P(children = f"{Instructions_Names[2][i]}")]
 
