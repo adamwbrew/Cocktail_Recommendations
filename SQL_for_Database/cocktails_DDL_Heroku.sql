@@ -31,12 +31,12 @@ DROP TABLE IF EXISTS Sources;
 
 CREATE TABLE Ingredients(
     IngredientID int primary key auto_increment,
-    Ingredient_Name varchar(100) not null
+    Ingredient_Name varchar(500) not null
 );
 
 CREATE TABLE Measurements(
     MeasurementID int primary key auto_increment,
-    Measurement_Amount varchar(50) null
+    Measurement_Amount varchar(500) null
 );
 
 CREATE TABLE Instructions(
@@ -46,27 +46,27 @@ CREATE TABLE Instructions(
 
 CREATE TABLE Liquors(
     LiquorID int primary key auto_increment,
-    Liquor_Name varchar(100) not null
+    Liquor_Name varchar(500) not null
 );
 
 CREATE TABLE Glassware(
     GlasswareID int primary key auto_increment,
-    Glassware_Name varchar(100) not null
+    Glassware_Name varchar(500) not null
 );
 
 CREATE TABLE Garnishes(
     GarnishID int primary key auto_increment,
-    Garnish_Name varchar(100) not null
+    Garnish_Name varchar(500) not null
 );
 
 CREATE TABLE Sources(
     SourceID int primary key auto_increment,
-    Source varchar(250) not null
+    Source varchar(500) not null
 );
 
 CREATE TABLE Recipes(
     RecipeID int primary key auto_increment,
-    Cocktail_Name varchar(100) not null,
+    Cocktail_Name varchar(500) not null,
     LiquorID int not null, 
         constraint fk_Cocktails_Liquor foreign key (LiquorID) references Liquors(LiquorID),
     GlasswareID int not null, 

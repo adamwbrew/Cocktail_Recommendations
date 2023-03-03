@@ -396,7 +396,15 @@ INSERT INTO Instructions(Instruction)
                         WHERE CD.Instruction_22 = Instructions.Instruction)
     AND CD.Instruction_22 IS NOT NULL;
 
+INSERT INTO Instructions(Instruction)
+    SELECT DISTINCT Instruction_23
+    FROM Master.CocktailsDenormalized AS CD
+    WHERE NOT EXISTS (SELECT Instruction
+                        FROM Instructions
+                        WHERE CD.Instruction_22 = Instructions.Instruction)
+    AND CD.Instruction_23 IS NOT NULL;
 
+    
 -- Liquors added - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 INSERT INTO Liquors(Liquor_Name)
