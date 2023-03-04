@@ -183,7 +183,7 @@ def Similarity_Added_labels(df_drinks, drink_ingredients_list):
 
 # app - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 # link fontawesome 
-dash.register_page(__name__, path='/Ingredient_based_Recommendation')
+dash.register_page(__name__, path='/')
 
 cocktail_names = list(set(Cocktails["Cocktail_Name"].tolist()))
 cocktail_names.sort()
@@ -192,9 +192,26 @@ Ingredient_query = list(set(Ingredient_query["Ingredient_Name"].tolist()))
 Ingredient_query.sort()
 
 # app for cocktail search with all information formatted
+
 layout = html.Div(children=[
+    dbc.Button(
+        "Click here to collapse the introduction",
+        id="collapse-button",
+        className="mb-3",
+        color="primary",
+    ),
+    dbc.Collapse(
+        dbc.Card(dbc.CardBody(
+                'Welcome to our cocktail recommendation app, where you can discover new and delicious cocktails tailored to your taste preferences. No more ordering the same old drink every time you go out! Our app is user-friendly and easy to use, providing you with detailed information on each recipe, including main liquor used, list of ingredients, instructions on how to make the cocktail, preferred glassware, garnishes, and the source of the recipe. With our comprehensive database of cocktail recipes and powerful search tools, you can confidently create your perfect drink at home or order confidently at the bar.'
+                , style={'font-size': '20px'})
+        ),
+        id="collapse",
+        is_open = True
+    ),
     html.H1(children='Ingredient Based Recommendations', style={'textAlign': 'center','margin-bottom':25, 'margin-top':25}),
-    html.P(children = "This page is a great way to discover new cocktails based on the specific ingredients you're in the mood for. Simply enter one or more ingredients that you'd like to include in your cocktail, and our app will provide you with three personalized cocktail recommendations that match your preferences.", style={'fontSize': '20px'}),
+    dcc.Markdown('''                 
+                Our home page features ingredient-based recommendations, allowing you to input your favorite ingredients and receive three personalized cocktail recommendations. 
+                 ''', style={'font-size': '20px'}),
     # Cocktail Relay System
     html.Div([
         dcc.Textarea(
@@ -207,6 +224,18 @@ layout = html.Div(children=[
 
     ])
 ])
+
+# Callback to toggle the collapse and change button text
+@callback(
+    [dash.dependencies.Output("collapse", "is_open"),
+     dash.dependencies.Output("collapse-button", "children")],
+    [dash.dependencies.Input("collapse-button", "n_clicks")],
+    [dash.dependencies.State("collapse", "is_open")],
+)
+def toggle_collapse(n_clicks, is_open):
+    if n_clicks:
+        return not is_open, "Click here to {} the introduction".format("expand" if is_open else "collapse")
+    return is_open, "Click here to {} the introduction".format("collapse" if is_open else "expand")
 
 def list_formatter(list_):
     list_.sort()
