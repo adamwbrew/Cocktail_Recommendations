@@ -1,9 +1,7 @@
 import dash
 import dash_bootstrap_components as dbc
 from dash import Input, Output, State, dcc, html, callback
-import dash_html_components as html
 import pandas as pd
-import pymssql
 import os
 import pymysql.cursors
 
