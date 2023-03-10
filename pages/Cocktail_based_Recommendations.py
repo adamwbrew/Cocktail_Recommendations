@@ -191,42 +191,57 @@ dash.register_page(__name__, path='/Cocktail_based_Recommendation')
 cocktail_names = list(set(Cocktails["Cocktail_Name"].tolist()))
 cocktail_names.sort()
 
-# CSS styles for the button container
+# CSS styles for the container div
 button_container_style = {
     "position": "relative",  # make the position relative
-    "margin-top": "7px"  # set the initial margin
+    "padding-top": "30px"
 }
 
-# Updated layout with the button wrapped in a container div
+# Updated layout with the button and dropdown wrapped in a single container div
 layout = html.Div(children=[
     html.H1(children='Cocktail Based Recommendations', style={'textAlign': 'center', 'margin-bottom':25, 'margin-top':25}),
     dcc.Markdown('''
-                 This page lets you easily find new cocktail recommendations based on your existing preferences. Simply input one or more cocktails that you already enjoy, and our app will generate three personalized cocktail recommendations tailored to your tastes.
-                 
-                 In addition to generating personalized cocktail recommendations, our app also allows you to manage your cocktail list with ease. You can delete any added cocktail by simply clicking the small blue *X* next to it. Alternatively, you can delete the entire cocktail by using the delete button on your keyboard.
-                 
-                 To further enhance your user experience, we've included a filter function that allows you to search for specific cocktails based on text filter. Simply add your desired text to the dropdown menu, and our app will show you only the cocktails that match your search criteria. This makes it easier for you to find the perfect cocktail to enjoy at any time. Try it out now and discover your new favorite cocktails!
-                 ''', style={'fontSize': '20px'}),
+                This page lets you easily find new cocktail recommendations based on your existing preferences. Simply input one or more cocktails that you already enjoy, and our app will generate three personalized cocktail recommendations tailored to your tastes. You can select up to three cocktails from the dropdown menu. 
+
+                In addition to generating personalized cocktail recommendations, our app also allows you to manage your cocktail list with ease. You can delete any added cocktail by simply clicking the small blue X next to it. Alternatively, you can delete the entire cocktail by using the delete button on your keyboard. To clear all cocktails selected, click the small white X on the right of the dropdown menu.
+
+                To further enhance your user experience, we've included a filter function that allows you to search for specific cocktails based on text filter. Simply add your desired text to the dropdown menu, and our app will show you only the cocktails that match your search criteria. This makes it easier for you to find the perfect cocktail to enjoy at any time. Try it out now and discover your new favorite cocktails!
+                ''',
+                style={'fontSize': '20px'}),
     # Cocktail Relay System
     html.Div([
-        # Drop down for cocktails
+        # Container div for dropdown and button
         html.Div([
-        dcc.Dropdown(options=cocktail_names,
-                        placeholder = "Select or Search for Cocktail",
-                        value= None,  # initial value displayed when page first loads
-                        clearable=True,  # allow users to clear their selection
-                        searchable = True,
-                        multi = True,
-                        style={"backgroundColor": "white", "color": "black", "fontSize": "24px", "height": "100px", "maxHeight": "100px"},
-                        id = "dropdown_cocktail"),
-        ]),
-        # Container div for the button
-        html.Div([
-            dbc.Button("Click me", id="dropdown-state-example-button", color="info", className="me-1", n_clicks=0),
-        ], id="dropdown-state-example-button-container", style=button_container_style),
+            # Drop down for cocktails
+            dcc.Dropdown(options=cocktail_names,
+                            placeholder = "Select or Search for Cocktail",
+                            value= None,  # initial value displayed when page first loads
+                            clearable=True,  # allow users to clear their selection
+                            searchable = True,
+                            multi = True,
+                            style={"backgroundColor": "white", "color": "black", "fontSize": "24px", "height": "100px", "width":"100%"},
+                            id = "dropdown_cocktail")], style = {"display":"flex"}),
+            # Button container div
+            html.Div([
+                dbc.Button("Click me", id="dropdown-state-example-button", color="info", className="me-1", n_clicks=0),
+            ], id="dropdown-state-example-button-container", style=button_container_style),
         html.Div(id='dropdown-state-example-output', style={'whiteSpace': 'pre-line'})
     ])
 ])
+
+# Callback function to limit the number of selected items to three
+@callback(
+    Output("dropdown_cocktail", "value"),
+    Input("dropdown_cocktail", "value")
+)
+def limit_selection(value):
+    if value is None:
+        return value
+    if len(value) > 3:
+        return value[:3]
+    else:
+        return value
+    
 
 def list_formatter(list_):
     list_.sort()
