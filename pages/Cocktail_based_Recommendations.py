@@ -218,7 +218,7 @@ layout = html.Div(children=[
                             searchable = True,
                             multi = True,
                             style={"backgroundColor": "white", "color": "black", "fontSize": "24px", "height": "100px", "width":"100%"},
-                            id = "dropdown_cocktail")], style = {"display":"flex"}),
+                            id = "dropdown_cocktail_CR")], style = {"display":"flex"}),
             # Button container div
             html.Div([
                 dbc.Button("Click me", id="dropdown-state-example-button", color="info", className="me-1", n_clicks=0),
@@ -229,8 +229,8 @@ layout = html.Div(children=[
 
 # Callback function to limit the number of selected items to three
 @callback(
-    Output("dropdown_cocktail", "value"),
-    Input("dropdown_cocktail", "value")
+    Output("dropdown_cocktail_CR", "value"),
+    Input("dropdown_cocktail_CR", "value")
 )
 def limit_selection(value):
     if value is None:
@@ -277,7 +277,7 @@ def sort_instructions(instructions):
 @callback(
     Output('dropdown-state-example-output', 'children'),
     Input('dropdown-state-example-button', 'n_clicks'),
-    State('dropdown_cocktail', 'value')
+    State('dropdown_cocktail_CR', 'value')
 )
 def update_output(n_clicks, value_1):
     if n_clicks > 0:
@@ -378,7 +378,7 @@ def update_output(n_clicks, value_1):
                     output_Source_3 += [html.P(children = f"{Source_Names[2]}")]
 
 
-                row_break = html.Div(html.Hr(style={'borderWidth': "5.5vh", "width": "100%", "color": "#FFFFFF", 'textAlign': 'center'}))
+                row_break = html.Div(html.Hr(style={'borderWidth': "0.25vh", "width": "100%", "color": "#FFFFFF", 'textAlign': 'center'}))
                 input = html.P(children=f"\nYou have entered: (with duplicates removed){list_formatter(value_1)}" , style={'font-size': '15px', 'margin-bottom':25, 'margin-top':25})
                 header_1 = html.H1(children=f'{Cocktail_Names[0]}', style={'textAlign': 'center', 'margin-bottom':25, 'margin-top':25})
                 row_1 = html.Div(

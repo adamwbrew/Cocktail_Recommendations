@@ -215,7 +215,7 @@ layout = html.Div(children=[
         dcc.Textarea(
         id='textarea-state-example',
         placeholder='Type ingredients here with commas separating the ingredients.\nFor example: Cherry, Lime, Vodka',
-        style={'width': '100%', 'height': 80},
+        style={'width': '100%', 'height': 80, 'backgroundColor': "white", "color":"black"},
         ),
         html.Div([dbc.Button("Click me", id="textarea-state-example-button", color="info", className="me-1", n_clicks=0)]),
         html.Div(id='textarea-state-example-output', style={'whiteSpace': 'pre-line'})
@@ -367,7 +367,7 @@ def update_output(n_clicks, value_1):
                         output_Source_3 += [html.P(children = f"{Source_Names[2]}")]
 
 
-                    row_break = html.Div(html.Hr(style={'borderWidth': "5.5vh", "width": "100%", "color": "#FFFFFF", 'textAlign': 'center'}))
+                    row_break = html.Div(html.Hr(style={'borderWidth': "0.25vh", "width": "100%", "color": "#FFFFFF", 'textAlign': 'center'}))
                     input = html.P(children=f"\nYou have entered: (with duplicates removed){list_formatter(ingrdient_list)}" , style={'font-size': '15px', 'margin-bottom':25, 'margin-top':25})
                     header_1 = html.H1(children=f'{Cocktail_Names[0]}', style={'textAlign': 'center', 'margin-bottom':25, 'margin-top':25})
                     row_1 = html.Div(

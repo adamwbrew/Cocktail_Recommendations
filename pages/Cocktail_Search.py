@@ -1,4 +1,5 @@
 import dash
+import dash_bootstrap_components as dbc
 from dash import Input, Output, dcc, html, callback
 import pandas as pd
 import os
@@ -105,8 +106,7 @@ dash.register_page(__name__, path='/Search')
 
 cocktail_names = list(set(Cocktails["Cocktail_Name"].tolist()))
 cocktail_names.sort()
-options = [{"label": name, "value": name} for name in cocktail_names]
-print(cocktail_names[:5])
+options = [{"label": f"{cocktail_names[name]}", "value": f"{cocktail_names[name]}"} for name in range(len(cocktail_names))]
 
 
 # app for cocktail search with all information formatted
@@ -115,9 +115,9 @@ layout = html.Div(children=[
     html.P(children = "This page  is a powerful tool that allows you to search through our comprehensive database of cocktail recipes. You'll find information on the main liquor used, a list of ingredients, instructions on how to make the cocktail, preferred glassware, garnishes, and the source of the recipe, if known.", style={'fontSize': '20px'}),
     # Cocktail Relay System
     html.Div([
-        dcc.Dropdown(options=cocktail_names,
+        dcc.Dropdown(options=options,
                         placeholder = "Select or Search for Cocktail",
-                        # value= None,  # initial value displayed when page first loads
+                        value= None,  # initial value displayed when page first loads
                         clearable=False,
                         searchable = True,
                         multi = False,
@@ -126,25 +126,25 @@ layout = html.Div(children=[
     ]),
     html.Br(),
     html.H1(id = "Cocktail_Output", style={'textAlign': 'center', 'margin-bottom':25, 'margin-top':25}),
-    # html.Div(
-    #                 [
-    #                     dbc.Row(
-    #                         [
-    #                             dbc.Col(html.Div([html.P(id = "Liquor_Output")])),
-    #                             dbc.Col(html.Div([html.P(id = "Garnish_Output")])),
-    #                             dbc.Col(html.Div([html.P(id = "Glassware_Output")])),
-    #                             dbc.Col(html.Div(id = "Source_Output")),
-    #                         ]
-    #                     ),
-    #                     html.Br(),
-    #                     dbc.Row(
-    #                         [
-    #                             dbc.Col(html.Div(id = "Ingredients_Output")),
-    #                             dbc.Col(html.Div(id = "Instructions_Output")),
-    #                         ]
-    #                     ),
-    #                 ]
-    #             )
+    html.Div(
+                    [
+                        dbc.Row(
+                            [
+                                dbc.Col(html.Div([html.P(id = "Liquor_Output")])),
+                                dbc.Col(html.Div([html.P(id = "Garnish_Output")])),
+                                dbc.Col(html.Div([html.P(id = "Glassware_Output")])),
+                                dbc.Col(html.Div(id = "Source_Output")),
+                            ]
+                        ),
+                        html.Br(),
+                        dbc.Row(
+                            [
+                                dbc.Col(html.Div(id = "Ingredients_Output")),
+                                dbc.Col(html.Div(id = "Instructions_Output")),
+                            ]
+                        ),
+                    ]
+                )
 
 ])
 
@@ -154,15 +154,11 @@ layout = html.Div(children=[
     Input("dropdown_cocktail", component_property = "value")
 )
 def cocktail_output(user_input):
-    print(user_input)
     output = ""
     if user_input is None:
         output = None
     else:
-        return f"You have selected: {user_input}"
-        print(user_input)
         mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
-        print(mini_df.shape, user_input)
         cocktail = mini_df['Cocktail_Name'].iloc[0]
         output = html.H1(
             children=cocktail,
@@ -181,124 +177,124 @@ def cocktail_output(user_input):
     return output
 
 
-# @callback(
-#     Output("Liquor_Output", component_property = "children"),
-#     Input("dropdown_cocktail", component_property = "value")
-# )
-# def cocktail_output(user_input):
-#     output = ""
-#     if(user_input == None):
-#         output = None
-#     else:
-#         output = [html.H2(children='Liquor', style = {'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
-#         mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
-#         liquor = mini_df['Liquor_Name'].iloc[0]
-#         output += [html.P(children = f"{liquor}", style = {'margin-left':50, 'margin-right':50})]
-#     return output
+@callback(
+    Output("Liquor_Output", component_property = "children"),
+    Input("dropdown_cocktail", component_property = "value")
+)
+def cocktail_output(user_input):
+    output = ""
+    if(user_input == None):
+        output = None
+    else:
+        output = [html.H2(children='Liquor', style = {'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
+        mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
+        liquor = mini_df['Liquor_Name'].iloc[0]
+        output += [html.P(children = f"{liquor}", style = {'margin-left':50, 'margin-right':50})]
+    return output
 
 
-# @callback(
-#     Output("Ingredients_Output", component_property = "children"),
-#     Input("dropdown_cocktail", component_property = "value")
-# )
-# def cocktail_output(user_input):
-#     output = ""
-#     if(user_input == None):
-#         output = None
-#     else:
-#         output = [html.H2(children='Ingredients', style = {'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
-#         mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
-#         ingredients = mini_df['Ingredients'].iloc[0]
-#         for i in range(len(ingredients)):
-#             output += [html.P(children = f"{ingredients[i]}", style = {'margin-left':50, 'margin-right':50})]
-#             output +=  [html.Br()]
-#     return output
+@callback(
+    Output("Ingredients_Output", component_property = "children"),
+    Input("dropdown_cocktail", component_property = "value")
+)
+def cocktail_output(user_input):
+    output = ""
+    if(user_input == None):
+        output = None
+    else:
+        output = [html.H2(children='Ingredients', style = {'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
+        mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
+        ingredients = mini_df['Ingredients'].iloc[0]
+        for i in range(len(ingredients)):
+            output += [html.P(children = f"{ingredients[i]}", style = {'margin-left':50, 'margin-right':50})]
+            output +=  [html.Br()]
+    return output
 
-# def sort_instructions(instructions):
-#     output = []
-#     unknown_step = []
-#     for intruction in instructions:
-#         prep_test = intruction.split(":")[0].lower()
-#         if(prep_test == "prep"):
-#             output.append(intruction)
-#         elif(prep_test.isdigit() == False):
-#             if(unknown_step == []):
-#                 unknown_step.append("Steps included but with unknown order:")
-#             unknown_step.append(intruction)
-#     removed_prep = instructions.copy()
-#     if(output != []):
-#         removed_prep.remove(output[0])
-#     if(unknown_step[1:] != []):
-#         for i in unknown_step[1:]:
-#             removed_prep.remove(i)
-#     removed_prep.sort(key = lambda x : x.split(":")[0].zfill(2))
-#     for instruction in removed_prep:
-#         output.append(instruction)
-#     output += unknown_step
-#     return output
+def sort_instructions(instructions):
+    output = []
+    unknown_step = []
+    for intruction in instructions:
+        prep_test = intruction.split(":")[0].lower()
+        if(prep_test == "prep"):
+            output.append(intruction)
+        elif(prep_test.isdigit() == False):
+            if(unknown_step == []):
+                unknown_step.append("Steps included but with unknown order:")
+            unknown_step.append(intruction)
+    removed_prep = instructions.copy()
+    if(output != []):
+        removed_prep.remove(output[0])
+    if(unknown_step[1:] != []):
+        for i in unknown_step[1:]:
+            removed_prep.remove(i)
+    removed_prep.sort(key = lambda x : x.split(":")[0].zfill(2))
+    for instruction in removed_prep:
+        output.append(instruction)
+    output += unknown_step
+    return output
 
-# @callback(
-#     Output("Instructions_Output", component_property = "children"),
-#     Input("dropdown_cocktail", component_property = "value")
-# )
-# def cocktail_output(user_input):
-#     output = ""
-#     if(user_input == None):
-#         output = None
-#     else:
-#         output = [html.H2(children='Instructions', style = {'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
-#         mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
-#         instructions = mini_df['Instructions'].iloc[0]
-#         instructions = sort_instructions(instructions)
-#         for i in range(len(instructions)):
-#             output += [html.P(children = f"{instructions[i]}", style = {'margin-left':50, 'margin-right':50})]
-#             output +=  [html.Br()]
-#     return output
-
-
-# @callback(
-#     Output("Glassware_Output", component_property = "children"),
-#     Input("dropdown_cocktail", component_property = "value")
-# )
-# def cocktail_output(user_input):
-#     output = ""
-#     if(user_input == None):
-#         output = None
-#     else:
-#         output = [html.H2(children='Glassware', style = {'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
-#         mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
-#         glassware = mini_df['Glassware_Name'].iloc[0]
-#         output += [html.P(children = f"{glassware}", style = {'margin-left':50, 'margin-right':50})]
-#     return output
+@callback(
+    Output("Instructions_Output", component_property = "children"),
+    Input("dropdown_cocktail", component_property = "value")
+)
+def cocktail_output(user_input):
+    output = ""
+    if(user_input == None):
+        output = None
+    else:
+        output = [html.H2(children='Instructions', style = {'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
+        mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
+        instructions = mini_df['Instructions'].iloc[0]
+        instructions = sort_instructions(instructions)
+        for i in range(len(instructions)):
+            output += [html.P(children = f"{instructions[i]}", style = {'margin-left':50, 'margin-right':50})]
+            output +=  [html.Br()]
+    return output
 
 
-# @callback(
-#     Output("Garnish_Output", component_property = "children"),
-#     Input("dropdown_cocktail", component_property = "value")
-# )
-# def cocktail_output(user_input):
-#     output = ""
-#     if(user_input == None):
-#         output = None
-#     else:
-#         output = [html.H2(children='Garnish', style = {'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
-#         mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
-#         garnish = mini_df['Garnish_Name'].iloc[0]
-#         output += [html.P(children = f"{garnish}", style = {'margin-left':50, 'margin-right':50})]
-#     return output
+@callback(
+    Output("Glassware_Output", component_property = "children"),
+    Input("dropdown_cocktail", component_property = "value")
+)
+def cocktail_output(user_input):
+    output = ""
+    if(user_input == None):
+        output = None
+    else:
+        output = [html.H2(children='Glassware', style = {'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
+        mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
+        glassware = mini_df['Glassware_Name'].iloc[0]
+        output += [html.P(children = f"{glassware}", style = {'margin-left':50, 'margin-right':50})]
+    return output
 
 
-# @callback(
-#     Output("Source_Output", component_property = "children"),
-#     Input("dropdown_cocktail", component_property = "value")
-# )
-# def cocktail_output(user_input):
-#     output = ""
-#     if(user_input == None):
-#         output = None
-#     else:
-#         output = [html.H2(children='Source', style = {'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
-#         mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
-#         source = mini_df['Source'].iloc[0]
-#         output += [html.P(children = f"{source}", style = {'margin-left':50, 'margin-right':50})]
-#     return output
+@callback(
+    Output("Garnish_Output", component_property = "children"),
+    Input("dropdown_cocktail", component_property = "value")
+)
+def cocktail_output(user_input):
+    output = ""
+    if(user_input == None):
+        output = None
+    else:
+        output = [html.H2(children='Garnish', style = {'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
+        mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
+        garnish = mini_df['Garnish_Name'].iloc[0]
+        output += [html.P(children = f"{garnish}", style = {'margin-left':50, 'margin-right':50})]
+    return output
+
+
+@callback(
+    Output("Source_Output", component_property = "children"),
+    Input("dropdown_cocktail", component_property = "value")
+)
+def cocktail_output(user_input):
+    output = ""
+    if(user_input == None):
+        output = None
+    else:
+        output = [html.H2(children='Source', style = {'margin-left':40, 'margin-right':40, 'font-size': '40px'})]
+        mini_df = Cocktails[Cocktails["Cocktail_Name"] == f"{user_input}"]
+        source = mini_df['Source'].iloc[0]
+        output += [html.P(children = f"{source}", style = {'margin-left':50, 'margin-right':50})]
+    return output

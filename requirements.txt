@@ -3,6 +3,5 @@ dash==2.8.1
 dash_bootstrap_components==1.4.0
 Flask==2.2.3
 pandas==1.2.4
-pymssql==2.2.5
 PyMySQL==1.0.2
 user_agents==2.2.0
