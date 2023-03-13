@@ -217,7 +217,7 @@ layout = html.Div(children=[
                             clearable=True,  # allow users to clear their selection
                             searchable = True,
                             multi = True,
-                            style={"backgroundColor": "white", "color": "black", "fontSize": "15px", "height": "100px", "width":"100%"},
+                            style={"fontSize": "15px", "height": "100px", "width":"100%"},
                             id = "dropdown_cocktail_CR")], style = {"display":"flex"}),
             # Button container div
             html.Div([

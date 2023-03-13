@@ -215,7 +215,7 @@ layout = html.Div(children=[
         dcc.Textarea(
         id='textarea-state-example',
         placeholder='Type ingredients here with commas separating the ingredients.\nFor example: Cherry, Lime, Vodka',
-        style={'width': '100%', 'height': 80, 'backgroundColor': "white", "color":"black"},
+        style={'width': '100%', 'height': 80, 'backgroundColor': "black", "color":"white"},
         ),
         html.Div([dbc.Button("Click me", id="textarea-state-example-button", color="info", className="me-1", n_clicks=0)]),
         html.Div(id='textarea-state-example-output', style={'whiteSpace': 'pre-line'})

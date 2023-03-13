@@ -108,7 +108,6 @@ cocktail_names = list(set(Cocktails["Cocktail_Name"].tolist()))
 cocktail_names.sort()
 options = [{"label": f"{cocktail_names[name]}", "value": f"{cocktail_names[name]}"} for name in range(len(cocktail_names))]
 
-
 # app for cocktail search with all information formatted
 layout = html.Div(children=[
     html.H1(children='Search for a Cocktail', style={'textAlign': 'center','margin-bottom':25, 'margin-top':25}),
@@ -120,8 +119,7 @@ layout = html.Div(children=[
                         value= None,  # initial value displayed when page first loads
                         clearable=False,
                         searchable = True,
-                        multi = False,
-                        style={"backgroundColor": "white", "color": "black", 'white-space': 'normal', "width":"100%"},
+                        style={"width":"100%"},
                         id = "dropdown_cocktail")
     ]),
     html.Br(),
